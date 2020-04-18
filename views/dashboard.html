@@ -2,23 +2,12 @@
 <p>welcome {{name}}</p>
 <a href="/users/logout"><button>logout</button></a>
 
-
-    {{#if success_msg}}
-        <p>{{ success_msg }}</p>
-    {{/if}}
 <h2>add item</h2>
 
 <form action="http://localhost:5000/dashboard" method="POST">
 
     <p>type:</p>
-    <select type="text" name="type" id="">
-        <option value="Accessories">Accessories</option>
-        <option value="Hats">Hats</option>
-        <option value="Outerwear">Outerwear</option>
-        <option value="Tops">Tops</option>
-        <option value="Bottoms">Bottoms</option>
-        <option value="Full Body">Full Body</option>
-    </select>
+    <input type="text" name="type" id="">
 
     <p>brand:</p>
     <input type="text" name="brand" id="">
@@ -31,9 +20,8 @@
     <input type="submit" value="add clothing item!" class="">
 
 </form>
-<br>
 
-<div id="clothesList" class="row"></div>
+<div id="clothesList"></div>
 
 <script>
 //This Script makes a fetch (essential a GET Http) request to the server
@@ -45,17 +33,15 @@ fetch('http://localhost:5000/dashboard/getClothes')
         //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
         let dataFeed = item.map((item) => {
             return `
-            <br>
             <div>
-                <p>${item.type}</p>
+                <p>@${item.type}</p>
                 <p>${item.brand}</p>
                 <p>${item.itemName}</p>
             </div>
-            <hr>
         `
         }).join('');
         console.log(dataFeed)
         clothesList.innerHTML = dataFeed;
     })
     .catch(err => { throw err });
-<{{!}}/script>
+</script>

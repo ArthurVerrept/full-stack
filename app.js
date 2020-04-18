@@ -58,6 +58,8 @@ app.use('/', require('./routes/welcome.js'))
 // users route
 app.use('/users', require('./routes/users'))
 
+// dashboard route
+app.use('/dashboard', require('./routes/dashboard'))
 
 const PORT = process.env.PORT || 5000;
 
