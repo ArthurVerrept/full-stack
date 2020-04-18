@@ -1,0 +1,15 @@
+    {{#if success_msg}}
+        <p>{{ success_msg }}</p>
+    {{/if}}
+    {{#if error_msg}}
+        <p>{{ error_msg }}</p>
+    {{/if}}
+    {{#if error}}
+        <p>{{ error }}</p>
+    {{/if}}
+    <form action="http://localhost:5000/users/login" method="POST">
+        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="password" name="password" placeholder="Create Password" required>
+        <input type="submit" value="submit" class="">
+    </form>
+    <p>No account <a href="/users/register">register</a></p>
