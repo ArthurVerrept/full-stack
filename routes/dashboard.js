@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const fileUpload = require('express-fileupload');
+const fs = require('fs');
+
 const { ensureAuthenticated } = require('../config/auth')
 var userID = '';
 
+router.use(fileUpload());
 
 const Item = require('../models/Clothes.js');
 

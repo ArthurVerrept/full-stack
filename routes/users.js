@@ -13,7 +13,7 @@ router.get('/login', (req, res) => res.render('login', {layout: 'main'}))
 router.get('/register', (req, res) => res.render('register', {layout: 'main'}))
 
 router.post('/register', (req, res) =>{
-    console.log(req.body);
+    //console.log(req.body);
     // get post request
     const {name, email, password, password2} =  req.body;
 
@@ -52,15 +52,13 @@ router.post('/register', (req, res) =>{
                     email,
                     password
                 });
-
-
+                
                 // hash password
                 // adding salt to end of password for added security and then hashing
                 bcrypt.genSalt(10, (err, salt) => 
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err){throw err};
                         newUser.password = hash;
-
                         newUser.save()
                         .then(()=>{
                             // using success_msg from app.js

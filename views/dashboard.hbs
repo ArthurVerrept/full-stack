@@ -18,6 +18,7 @@
         <option value="Tops">Tops</option>
         <option value="Bottoms">Bottoms</option>
         <option value="Full Body">Full Body</option>
+        <option value="Full Body">Shoes</option>
     </select>
 
     <p>brand:</p>
@@ -32,30 +33,47 @@
 
 </form>
 <br>
+<hr>
+<hr>
+<h2>add Outfit</h2>
+<br>
 
+<p>Accessories:</p>
+<select type="text" name="Accessories" id="accessorieSelect">
+    <option value="Accessories">Accessories</option>
+</select>
+<p>Hat:</p>
+<select type="text" name="Hat" id="hatSelect">
+    <option value="Hat">None</option>
+</select>
+
+<p>Outerwear:</p>
+<select type="text" name="Hat" id="outerwearSelect">
+    <option value="Outerwear">None</option>
+</select>
+
+<p>Top:</p>
+<select type="text" name="Top" id="topSelect">
+    <option value="Tops">Tops</option>
+</select>
+
+<p>Bottom:</p>
+<select type="text" name="Bottom" id="bottomSelect">
+    <option value="Bottoms">Bottoms</option>
+</select>
+
+<p>Full Body:</p>
+<select type="text" name="Full Body" id="fullbodySelect">
+    <option value="Full Body">Full Body</option>
+</select>
+
+<p>Shoes:</p>
+<select type="text" name="Shoes" id="shoeSelect">
+    <option value="Shoes">Shoes</option>
+</select>
+
+
+
+<hr>
 <div id="clothesList" class="row"></div>
-
-<script>
-//This Script makes a fetch (essential a GET Http) request to the server
-const clothesList = document.getElementById('clothesList');
-fetch('http://localhost:5000/dashboard/getClothes')
-    .then(res => res.json())
-    .then((item) => {
-        //.map() is used to cycle through the array, and a template literal is used to return HTML for
-        //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
-        let dataFeed = item.map((item) => {
-            return `
-            <br>
-            <div>
-                <p>${item.type}</p>
-                <p>${item.brand}</p>
-                <p>${item.itemName}</p>
-            </div>
-            <hr>
-        `
-        }).join('');
-        console.log(dataFeed)
-        clothesList.innerHTML = dataFeed;
-    })
-    .catch(err => { throw err });
-<{{!}}/script>
+<script src="/js/script.js"></script>

@@ -14,8 +14,11 @@
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.17.0",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.9",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
