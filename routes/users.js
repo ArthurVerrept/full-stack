@@ -13,7 +13,6 @@ router.get('/login', (req, res) => res.render('login', {layout: 'main'}))
 router.get('/register', (req, res) => res.render('register', {layout: 'main'}))
 
 router.post('/register', (req, res) =>{
-    //console.log(req.body);
     // get post request
     const {name, email, password, password2} =  req.body;
 

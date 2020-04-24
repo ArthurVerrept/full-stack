@@ -1,9 +1,4 @@
-var items = [
-    accessories= {},
-    hats= {},
-    tops= {}
-];
-const select = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
+const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
 
 //This Script makes a fetch (essential a GET Http) request to the server
 const clothesList = document.getElementById('clothesList');
@@ -31,32 +26,52 @@ fetch('http://localhost:5000/dashboard/getClothes')
 
 
 function outfitSelect(item){
-    for(var i = 0; i < item.length; i++) {
-        if(item[i].type == 'Accessories'){
-            items.accessories.push(item[i]);
-        }
-        if(item[i].type == 'Hats'){
-            items.hats.push(item[i]);
-        }
-        if(item[i].type == 'Tops'){
-            items.tops.push(item[i]);
-        }
-        console.log(items);
-    }
+    console.log(item)
+    // go through each item of that first array column
+    for(var y = 0; y < item.length; y++) {
+        var selected;
+        var option = '';
+        var el;
+        if(item[y].type == 'Accessories'){
+            selected = document.getElementById('accessorieSelect');
+            console.log(item[y])
+            option = item[y];
 
-    // for(var i = 0; i < select.length; i++) {
-    //     // select the first tag
-    //     var selected = document.getElementById(select[i]);
-    //     // go through each first dimension of array
-    //     for(var x = 0; x < 7; x++) {
-    //         // go through each item of that first array column
-    //         for(var y = 0; y < items[x].length; y++) {
-    //             console.log(selected, items[x][y])
-    //             var option = items[x][y];
-    //             var el = document.createElement("option");
-    //             el.textContent = option.itemName;
-    //             selected.appendChild(el);
-    //         }
-    //     }
-    // }
+        }
+        else if(item[y].type == 'Hats'){
+            selected = document.getElementById('hatSelect');
+            console.log(item[y])
+            option = item[y];
+        }
+        else if(item[y].type == 'Outerwear'){
+            selected = document.getElementById('outerwearSelect');
+            console.log(item[y])
+            option = item[y];
+        }
+        else if(item[y].type == 'Tops'){
+            selected = document.getElementById('topSelect');
+            console.log(item[y])
+            option = item[y];
+        }
+        else if(item[y].type == 'Bottoms'){
+            selected = document.getElementById('bottomSelect');
+            console.log(item[y])
+            option = item[y];
+        }
+        else if(item[y].type == 'FullBody'){
+            selected = document.getElementById('fullbodySelect');
+            console.log(item[y])
+            option = item[y];
+        }
+        else if(item[y].type == 'Shoes'){
+            selected = document.getElementById('shoeSelect');
+            console.log(item[y])
+            option = item[y];
+        }
+        if(option != ''){
+            el = document.createElement("option");
+            el.textContent = option.itemName;
+            selected.appendChild(el);
+        }
+    }
 }

@@ -1,15 +1,14 @@
 <h1>dashboard</h1>
-<p>welcome {{name}}</p>
+<p>Welcome {{name}}</p>
 <a href="/users/logout"><button>logout</button></a>
 
 
     {{#if success_msg}}
         <p>{{ success_msg }}</p>
     {{/if}}
+<div class="col" style="width:200px !important; margin:0; position: absolute ">
 <h2>add item</h2>
-
-<form action="http://localhost:5000/dashboard" method="POST">
-
+<form action="http://localhost:5000/dashboard/addItem" method="POST">
     <p>type:</p>
     <select type="text" name="type" id="">
         <option value="Accessories">Accessories</option>
@@ -17,63 +16,68 @@
         <option value="Outerwear">Outerwear</option>
         <option value="Tops">Tops</option>
         <option value="Bottoms">Bottoms</option>
-        <option value="Full Body">Full Body</option>
-        <option value="Full Body">Shoes</option>
-    </select>
+        <option value="FullBody">Full Body</option>
+        <option value="Shoes">Shoes</option>
+    </select required>
 
     <p>brand:</p>
-    <input type="text" name="brand" id="">
+    <input type="text" name="brand" id="" required>
 
     <p>item name:</p>
-    <input type="text" name="itemName" id="">
+    <input type="text" name="itemName" id=""required>
 
     <p>add picture?</p>
 
     <input type="submit" value="add clothing item!" class="">
-
 </form>
-<br>
-<hr>
-<hr>
-<h2>add Outfit</h2>
-<br>
+</div>
 
+
+<div class="col" style="width:200px !important; margin-left: 250px !important; padding:0">
+
+<h2>add Outfit</h2>
+
+
+<form action="http://localhost:5000/dashboard/addOutfit" method="POST">
 <p>Accessories:</p>
 <select type="text" name="Accessories" id="accessorieSelect">
-    <option value="Accessories">Accessories</option>
+    <option value="none">None</option>
 </select>
 <p>Hat:</p>
-<select type="text" name="Hat" id="hatSelect">
-    <option value="Hat">None</option>
+<select type="text" name="Hats" id="hatSelect">
+    <option value="none">None</option>
 </select>
 
 <p>Outerwear:</p>
-<select type="text" name="Hat" id="outerwearSelect">
-    <option value="Outerwear">None</option>
+<select type="text" name="Outerwear" id="outerwearSelect">
+    <option value="none">None</option>
 </select>
 
 <p>Top:</p>
-<select type="text" name="Top" id="topSelect">
-    <option value="Tops">Tops</option>
+<select type="text" name="Tops" id="topSelect">
+    <option value="none">None</option>
 </select>
 
 <p>Bottom:</p>
-<select type="text" name="Bottom" id="bottomSelect">
-    <option value="Bottoms">Bottoms</option>
+<select type="text" name="Bottoms" id="bottomSelect">
+    <option value="none">None</option>
 </select>
 
 <p>Full Body:</p>
-<select type="text" name="Full Body" id="fullbodySelect">
-    <option value="Full Body">Full Body</option>
+<select type="text" name="FullBody" id="fullbodySelect">
+    <option value="none">None</option>
 </select>
 
 <p>Shoes:</p>
 <select type="text" name="Shoes" id="shoeSelect">
-    <option value="Shoes">Shoes</option>
+    <option value="none">None</option>
 </select>
 
+ <input type="submit" value="Make Outfit" class="">
+</form>
+</div>
 
-
+<br>
 <hr>
 <div id="clothesList" class="row"></div>
 <script src="/js/script.js"></script>
