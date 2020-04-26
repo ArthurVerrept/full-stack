@@ -43,7 +43,8 @@ router.post('/addItem', (req,res) => {
 });
 
 router.post('/addOutfit', (req,res) => {
-    const Outfit = { };
+    const Outfit = [];
+    const fitSend = {};
     const fit = { Accessories, Hats, Outerwear, Tops, Bottoms, FullBody, Shoes } = req.body;
 
     // get key of values from fit object
@@ -61,22 +62,25 @@ router.post('/addOutfit', (req,res) => {
         // if no clothing item was added
         if(fitVals[i] == 'none'){
             // value of fitVals array to object containing the key and none
-            fitVals[i] = {[fitKeys[i]]: 'none'};
-            console.log(fitVals[i])
+            Outfit[i] = {[fitKeys[i]]: 'none'};
         }
         // find item from name where ID matches loggin in user
         else{
-            Item.findOne({userID: userID, itemName: fitVals[i]}, (err, docs) => {
-                // set value to current key and item from db
-                Outfit[i] = {[fitKeys[i]]: docs};
-                console.log(Outfit[i])
+            Item.findOne({userID: userID, itemName: fitVals[i]})
+             // set value to current key and item from db
+            .then((docs)=> {
+                Outfit[i] = {[fitKeys[i]]: docs._id}
+                console.log(Outfit)
             })
         }
     }
 
+
     
 
 
+
+    console.log(fitSend)
     // const newOutfit = new Outfit({
     //     userID,
     //     Accessories,
