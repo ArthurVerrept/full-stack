@@ -6,6 +6,7 @@ const passport = require('passport')
 // user model
 const User = require('../models/Users.js');
 
+
 //login page
 router.get('/login', (req, res) => res.render('login', {layout: 'main'}))
 
@@ -74,11 +75,16 @@ router.post('/register', (req, res) =>{
 
 // login post route
 router.post('/login', (req, res, next) =>{
-    passport.authenticate('local', {
-        successRedirect: '/dashboard',
-        failureRedirect: '/users/login',
-        failureFlash: true
-    })(req, res, next);
+    try {
+        passport.authenticate('local', {
+            successRedirect: '/dashboard',
+            failureRedirect: '/users/login',
+            failureFlash: true
+        })(req, res, next);
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).send('Server Error')
+    }
 });
 
 // logout handle

@@ -3,9 +3,9 @@
 <a href="/users/logout"><button>logout</button></a>
 
 
-    {{#if success_msg}}
-        <p>{{ success_msg }}</p>
-    {{/if}}
+{{#if success_msg}}
+    <p>{{ success_msg }}</p>
+{{/if}}
 <div class="col" style="width:200px !important; margin:0; position: absolute ">
 <h2>add item</h2>
 <form action="http://localhost:5000/dashboard/addItem" method="POST">
