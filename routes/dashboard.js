@@ -4,7 +4,6 @@ const fileUpload = require('express-fileupload');
 const fs = require('fs');
 
 const { ensureAuthenticated } = require('../config/auth')
-var userID = '';
 
 router.use(fileUpload());
 
@@ -13,24 +12,23 @@ const Outfit = require('../models/Outfit.js');
 
 // render dashboard view and using second parameter ensureauthenticated to make sure user is loggin in or not
 router.get('/', ensureAuthenticated, (req, res) => {
-    userID = req.user._id;
     res.render('dashboard', {layout: 'main', name: req.user.name})
     //res.sendFile('/dashboard.html', {root: '/Users/mac/Desktop/Login/views'})
 });
 
 
 router.get('/getClothes', (req, res) => {
-    // finding clothes where the userID in db is same as userID of logged in account
-    Item.find({userID: userID}, (err, docs) => {
+    // finding clothes where the userID in db is same as req.user._id of logged in account taken from token
+    Item.find({userID: req.user._id}, (err, docs) => {
         res.json(docs);
-    })
+    }).catch(err=>console.log(err))
 });
 
 router.post('/addItem', (req,res) => {
     const {type, brand, itemName} =  req.body;
 
     const newItem = new Item({
-        userID,
+        userID: req.user._id,
         type,
         brand,
         itemName,
@@ -43,54 +41,54 @@ router.post('/addItem', (req,res) => {
 });
 
 router.post('/addOutfit', (req,res) => {
-    const Outfit = [];
-    const fitSend = {};
+    const sendFit = { }
     const fit = { Accessories, Hats, Outerwear, Tops, Bottoms, FullBody, Shoes } = req.body;
-
-    // get key of values from fit object
-    var fitKeys = Object.keys(fit)
 
     // get values from fit object
     var fitVals = Object.values(fit)
 
-    // get length of fit object
-    const fitSize = Object.getOwnPropertyNames(fit);
+    var fitKeys = Object.keys(fit)
 
-
-    // for every item in fit object
-    for (let i = 0; i < fitSize.length; i++) {
-        // if no clothing item was added
-        if(fitVals[i] == 'none'){
-            // value of fitVals array to object containing the key and none
-            Outfit[i] = {[fitKeys[i]]: 'none'};
+    // find all items from name and only from currently logged in user
+    Item.find({userID: req.user._id, itemName: fitVals})
+    .then((docs)=> {
+        // loop through retrieved items of clothing
+        for (let index = 0; index < docs.length; index++) {
+            // for each item retrieved, loop through each possible type of clothing
+            for (let x = 0; x < fitKeys.length; x++) {
+                // only search through types if value has not been previously set in loop
+                if(sendFit[fitKeys[x]] == 'none' || sendFit[fitKeys[x]] == undefined){
+                    // if type of clothing matches current key from key list
+                    if(docs[index].type == fitKeys[x]){
+                        // set send fit object to have current key and ID of item with matching type
+                        sendFit[fitKeys[x]] = docs[index]._id
+                    } else {
+                        // if they do not match set key to have ID of none
+                        sendFit[fitKeys[x]] = 'none'
+                    }
+                }
+            }
         }
-        // find item from name where ID matches loggin in user
-        else{
-            Item.findOne({userID: userID, itemName: fitVals[i]})
-             // set value to current key and item from db
-            .then((docs)=> {
-                Outfit[i] = {[fitKeys[i]]: docs._id}
-                console.log(Outfit)
-            })
-        }
-    }
 
+        const newOutfit = new Outfit({
+            userID: req.user._id,
+            Accessories: sendFit.Accessories,
+            Hats: sendFit.Hats,
+            Outerwear: sendFit.Outerwear,
+            Tops: sendFit.Tops,
+            Bottoms: sendFit.Bottoms,
+            FullBody: sendFit.FullBody,
+            Shoes: sendFit.Shoes
+        });
+        newOutfit.save();
+    }).catch(err=>console.log(err))
+
+
+       
 
     
 
-
-
-    console.log(fitSend)
-    // const newOutfit = new Outfit({
-    //     userID,
-    //     Accessories,
-    //     Hats,
-    //     Outerwear,
-    //     Tops,
-    //     Bottoms,
-    //     FullBody,
-    //     Shoes
-    // });
+    
 
     //console.log(newOutfit)
     //newOutfit.save();

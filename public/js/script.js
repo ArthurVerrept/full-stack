@@ -26,7 +26,6 @@ fetch('http://localhost:5000/dashboard/getClothes')
 
 
 function outfitSelect(item){
-    console.log(item)
     // go through each item of that first array column
     for(var y = 0; y < item.length; y++) {
         var selected;

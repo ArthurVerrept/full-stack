@@ -35,7 +35,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
 }));
 
 // passport middleware

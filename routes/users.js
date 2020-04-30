@@ -8,7 +8,16 @@ const User = require('../models/Users.js');
 
 
 //login page
-router.get('/login', (req, res) => res.render('login', {layout: 'main'}))
+// router.get('/login', (req, res) => res.render('login', {layout: 'main'}))
+
+// render main page
+router.get('/login', (req, res) => {
+    if(req.user != 'undefined' && req.user != null){
+        res.redirect('/dashboard');
+    } else {
+        res.render('login', {layout: 'main'});
+    }
+})
 
 //register page
 router.get('/register', (req, res) => res.render('register', {layout: 'main'}))
@@ -76,6 +85,7 @@ router.post('/register', (req, res) =>{
 // login post route
 router.post('/login', (req, res, next) =>{
     try {
+        // calling passport
         passport.authenticate('local', {
             successRedirect: '/dashboard',
             failureRedirect: '/users/login',

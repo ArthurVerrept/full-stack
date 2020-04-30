@@ -5,10 +5,12 @@ const { ensureAuthenticated } = require('../config/auth')
 
 // render main page
 router.get('/', (req, res) => {
-    console.log(req.user)
+    // checking through deserializeUser if user exists
     if(req.user != 'undefined' && req.user != null){
+        // if user exists redirect to dashboard
         res.redirect('/dashboard');
     } else {
+        // else render page as usual
         res.render('welcome', {layout: 'main'})
     }
 })
