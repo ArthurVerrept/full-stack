@@ -25,6 +25,25 @@ fetch('http://localhost:5000/dashboard/getClothes')
     .catch(err => { throw err });
 
 
+//  
+// 
+// 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function outfitSelect(item){
     // go through each item of that first array column
     for(var y = 0; y < item.length; y++) {

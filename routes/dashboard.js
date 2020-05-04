@@ -1,11 +1,24 @@
 const express = require('express');
+const multer = require("multer");
 const router = express.Router();
-const fileUpload = require('express-fileupload');
-const fs = require('fs');
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+
+const config = require('../config/config');
+
+cloudinary.config({
+    cloud_name: config.CLOUD_NAME,
+    api_key: config.API_KEY,
+    api_secret: config.API_SECRET
+  });
+    const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "clothing-users-app",
+    allowedFormats: ["jpg", "png"]
+  });
+const parser = multer({ storage: storage });
 
 const { ensureAuthenticated } = require('../config/auth')
-
-router.use(fileUpload());
 
 const Item = require('../models/Clothes.js');
 const Outfit = require('../models/Outfit.js');
@@ -40,7 +53,7 @@ router.post('/addItem', (req,res) => {
     res.redirect('/dashboard')
 });
 
-router.post('/addOutfit', (req,res) => {
+router.post('/addOutfit', parser.any(), (req,res) => {
     const sendFit = { }
     const fit = { Accessories, Hats, Outerwear, Tops, Bottoms, FullBody, Shoes } = req.body;
 
@@ -78,8 +91,10 @@ router.post('/addOutfit', (req,res) => {
             Tops: sendFit.Tops,
             Bottoms: sendFit.Bottoms,
             FullBody: sendFit.FullBody,
-            Shoes: sendFit.Shoes
+            Shoes: sendFit.Shoes,
+            ImageURL: req.files[0].url
         });
+        console.log(newOutfit)
         newOutfit.save();
     }).catch(err=>console.log(err))
 

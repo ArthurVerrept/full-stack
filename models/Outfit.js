@@ -26,6 +26,10 @@ const OutfitSchema = new mongoose.Schema({
     Shoes: {
         type: String
     },
+    ImageURL: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

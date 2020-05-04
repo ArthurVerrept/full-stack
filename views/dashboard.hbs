@@ -38,7 +38,8 @@
 <h2>add Outfit</h2>
 
 
-<form action="http://localhost:5000/dashboard/addOutfit" method="POST">
+<form action="http://localhost:5000/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
+<input type="file" name="file" id="file" class="">
 <p>Accessories:</p>
 <select type="text" name="Accessories" id="accessorieSelect">
     <option value="none">None</option>
@@ -79,5 +80,6 @@
 
 <br>
 <hr>
+<div id="picMe" class="row"></div>
 <div id="clothesList" class="row"></div>
 <script src="/js/script.js"></script>
