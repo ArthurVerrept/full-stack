@@ -1,10 +1,11 @@
 const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
-
+var items;
 //This Script makes a fetch (essential a GET Http) request to the server
 const clothesList = document.getElementById('clothesList');
 fetch('http://localhost:5000/dashboard/getClothes')
     .then(res => res.json())
     .then((item) => {
+        items = item;
         //.map() is used to cycle through the array, and a template literal is used to return HTML for
         //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
         let dataFeed = item.map((item) => {
@@ -25,11 +26,48 @@ fetch('http://localhost:5000/dashboard/getClothes')
     .catch(err => { throw err });
 
 
+
 //  
 // 
 // 
 
 
+//This Script makes a fetch (essential a GET Http) request to the server
+const outfitList = document.getElementById('outfitList');
+fetch('http://localhost:5000/dashboard/getOutfits')
+    .then(res => res.json())
+    .then((outfits) => {
+        console.log(outfits)
+        // //.map() is used to cycle through the array, and a template literal is used to return HTML for
+        // //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
+        // for (let i = 0; i < outfits.length; i++) {
+        //     for (let x = 0; x < outfits[i].length; x++) {
+        //         console.log(outfits[i][x]);
+        //     }
+        // }
+        // for (let i = 0; i < outfits.length; i++) {
+        // let dataFeed = outfits[i].map((outfit) => {
+        //     console.log(outfit)
+        //     return `
+        //     <br>
+        //     <div>
+        //         <p>${outfit.itemName}</p>
+        //         <p>${outfits.Hats}</p>
+        //         <p>${outfits.Outerwear}</p>
+        //         <p>${outfits.Tops}</p>
+        //         <p>${outfits.Bottoms}</p>
+        //         <p>${outfits.FullBody}</p>
+        //         <p>${outfits.Shoes}</p>
+        //         <img src="${outfits.URL}" alt="">
+        //     </div>
+        //     <hr>
+        // `
+        // })//.join('');
+        //console.log(dataFeed)
+        // outfitList.innerHTML = dataFeed;
+    // }
+    })
+    .catch(err => { throw err });
 
 
 
@@ -52,38 +90,31 @@ function outfitSelect(item){
         var el;
         if(item[y].type == 'Accessories'){
             selected = document.getElementById('accessorieSelect');
-            console.log(item[y])
             option = item[y];
 
         }
         else if(item[y].type == 'Hats'){
             selected = document.getElementById('hatSelect');
-            console.log(item[y])
             option = item[y];
         }
         else if(item[y].type == 'Outerwear'){
             selected = document.getElementById('outerwearSelect');
-            console.log(item[y])
             option = item[y];
         }
         else if(item[y].type == 'Tops'){
             selected = document.getElementById('topSelect');
-            console.log(item[y])
             option = item[y];
         }
         else if(item[y].type == 'Bottoms'){
             selected = document.getElementById('bottomSelect');
-            console.log(item[y])
             option = item[y];
         }
         else if(item[y].type == 'FullBody'){
             selected = document.getElementById('fullbodySelect');
-            console.log(item[y])
             option = item[y];
         }
         else if(item[y].type == 'Shoes'){
             selected = document.getElementById('shoeSelect');
-            console.log(item[y])
             option = item[y];
         }
         if(option != ''){

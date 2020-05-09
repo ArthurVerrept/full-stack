@@ -37,6 +37,55 @@ router.get('/getClothes', (req, res) => {
     }).catch(err=>console.log(err))
 });
 
+router.get('/getOutfits', (req, res) => {
+
+var outfitIDs =[];
+var outfitKeys =[];
+
+var JSONsend = [];
+
+
+    Item.find({userID: req.user._id}, (err, docs) => {
+    }).then((itemDocs) => { 
+        Outfit.find({userID: req.user._id}, (err, outfitDocs) => { 
+            for (let i = 0; i < outfitDocs.length; i++) {
+                outfitIDs.push(Object.values(outfitDocs[i]._doc)) 
+                outfitKeys.push(Object.keys(outfitDocs[i]._doc)) 
+            }
+            // console.log(outfitDocs)
+            // console.log(outfitKeys)
+            // console.log(outfitIDs)
+    
+            // for every outfit
+            for (let x = 0; x < outfitDocs.length; x++) {
+                var tempArray = [];
+                // look through every item id to match to item of clothing
+                for (let y = 0; y < outfitKeys[0].length; y++) {
+                    if(outfitKeys[x][y] == '_id' || outfitKeys[x][y] == 'userID' || outfitKeys[x][y] == '__v' || outfitKeys[x][y] == 'date'){
+                        //console.log('not one we want')
+                    }
+                    // else if(outfitKeys[x][y] == 'ImageURL') {
+                    //     tempArray[x] = {URL: outfitIDs[x][y]};
+                    // }
+                    // else if(outfitIDs[x][y] == 'none') {
+                    //     tempArray[x] = {type: outfitKeys[x][y], itemName: 'none'};
+                    // }
+                    else {
+                        for (let z = 0; z < itemDocs.length; z++) {
+                           if(itemDocs[z]._id.toString() == outfitIDs[x][y]){
+                                tempArray[x] = itemDocs[z];
+                           }
+                        }
+                    }
+                }
+                JSONsend[x] = tempArray
+            }
+            res.send(JSONsend)
+        })
+        .catch(err=>console.log(err))
+    })
+})
+
 router.post('/addItem', (req,res) => {
     const {type, brand, itemName} =  req.body;
 
@@ -56,7 +105,6 @@ router.post('/addItem', (req,res) => {
 router.post('/addOutfit', parser.any(), (req,res) => {
     const sendFit = { }
     const fit = { Accessories, Hats, Outerwear, Tops, Bottoms, FullBody, Shoes } = req.body;
-
     // get values from fit object
     var fitVals = Object.values(fit)
 
@@ -94,25 +142,10 @@ router.post('/addOutfit', parser.any(), (req,res) => {
             Shoes: sendFit.Shoes,
             ImageURL: req.files[0].url
         });
-        console.log(newOutfit)
-        newOutfit.save();
-    }).catch(err=>console.log(err))
-
-
-       
-
-    
-
-    
-
-    //console.log(newOutfit)
-    //newOutfit.save();
-
-    // // console.log(type, brand, itemName);
-    // // console.log(userID);
-
-    // req.flash('success_msg', 'Item Added!')
-    // res.redirect('/dashboard')
+        //newOutfit.save();
+    })
+    .then(() => {res.redirect('/dashboard')})
+    .catch(err=>console.log(err));
 });
 
 module.exports = router;

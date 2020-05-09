@@ -2,7 +2,6 @@
 <p>Welcome {{name}}</p>
 <a href="/users/logout"><button>logout</button></a>
 
-
 {{#if success_msg}}
     <p>{{ success_msg }}</p>
 {{/if}}
@@ -39,6 +38,7 @@
 
 
 <form action="http://localhost:5000/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
+<p>jpeg or png images only</p>
 <input type="file" name="file" id="file" class="">
 <p>Accessories:</p>
 <select type="text" name="Accessories" id="accessorieSelect">
@@ -77,6 +77,8 @@
  <input type="submit" value="Make Outfit" class="">
 </form>
 </div>
+
+<div id="outfitList" class="col" style="width:200px !important; margin-left: 500px !important; padding:0"></div>
 
 <br>
 <hr>
