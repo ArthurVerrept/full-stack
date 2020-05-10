@@ -52,9 +52,6 @@ var JSONsend = [];
                 outfitIDs.push(Object.values(outfitDocs[i]._doc)) 
                 outfitKeys.push(Object.keys(outfitDocs[i]._doc)) 
             }
-            // console.log(outfitDocs)
-            // console.log(outfitKeys)
-            // console.log(outfitIDs)
     
             // for every outfit
             for (let x = 0; x < outfitDocs.length; x++) {
@@ -64,18 +61,18 @@ var JSONsend = [];
                     if(outfitKeys[x][y] == '_id' || outfitKeys[x][y] == 'userID' || outfitKeys[x][y] == '__v' || outfitKeys[x][y] == 'date'){
                         //console.log('not one we want')
                     }
-                    // else if(outfitKeys[x][y] == 'ImageURL') {
-                    //     tempArray[x] = {URL: outfitIDs[x][y]};
-                    // }
-                    // else if(outfitIDs[x][y] == 'none') {
-                    //     tempArray[x] = {type: outfitKeys[x][y], itemName: 'none'};
-                    // }
+                    else if(outfitKeys[x][y] == 'ImageURL') {
+                        tempArray.push({URL: outfitIDs[x][y]});
+                    }
+                    else if(outfitIDs[x][y] == 'none') {
+                        tempArray.push({type: outfitKeys[x][y], itemName: 'none'});
+                    }
                     else {
                         for (let z = 0; z < itemDocs.length; z++) {
                            if(itemDocs[z]._id.toString() == outfitIDs[x][y]){
-                                tempArray[x] = itemDocs[z];
+                                tempArray.push(itemDocs[z]);
                            }
-                        }
+                        } 
                     }
                 }
                 JSONsend[x] = tempArray
@@ -142,7 +139,7 @@ router.post('/addOutfit', parser.any(), (req,res) => {
             Shoes: sendFit.Shoes,
             ImageURL: req.files[0].url
         });
-        //newOutfit.save();
+        newOutfit.save();
     })
     .then(() => {res.redirect('/dashboard')})
     .catch(err=>console.log(err));
