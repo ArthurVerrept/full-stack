@@ -1,4 +1,28 @@
     <h1>Welcome</h1>
-    <a href="/users/register"><button>register</button></a>
-    <a href="/users/login"><button>login</button></a>
-    
+    <div id="outfitList">
+
+
+    </div>
+
+
+<script>
+
+    //This Script makes a fetch (essential a GET Http) request to the server
+const outfitList = document.getElementById('outfitList');
+fetch('http://localhost:5000/dashboard/getAllOutfits')
+    .then(res => res.json())
+    .then((outfits) => {
+        console.log(outfits)
+        let dataFeed = outfits.map((outfits) => {
+            return `
+            <br>
+            <div>
+                <img src="${outfits.ImageURL}">
+            </div>
+            <hr>
+        `
+        }).join('');
+        //console.log(dataFeed)
+        outfitList.innerHTML = dataFeed;
+    });
+</script>

@@ -6,19 +6,6 @@ const passport = require('passport')
 // user model
 const User = require('../models/Users.js');
 
-
-//login page
-// router.get('/login', (req, res) => res.render('login', {layout: 'main'}))
-
-// render main page
-router.get('/login', (req, res) => {
-    if(req.user != 'undefined' && req.user != null){
-        res.redirect('/dashboard');
-    } else {
-        res.render('login', {layout: 'main'});
-    }
-})
-
 //register page
 router.get('/register', (req, res) => res.render('register', {layout: 'main'}))
 
@@ -72,7 +59,7 @@ router.post('/register', (req, res) =>{
                         .then(()=>{
                             // using success_msg from app.js
                             req.flash('success_msg', 'you are now registered')
-                            res.redirect('/users/login')
+                            res.redirect('/')
                         })
                         .catch(err => console.log(err))
                 }))
@@ -87,8 +74,8 @@ router.post('/login', (req, res, next) =>{
     try {
         // calling passport
         passport.authenticate('local', {
-            successRedirect: '/dashboard',
-            failureRedirect: '/users/login',
+            successRedirect: '/',
+            failureRedirect: '/',
             failureFlash: true
         })(req, res, next);
     } catch (err) {
@@ -101,7 +88,7 @@ router.post('/login', (req, res, next) =>{
 router.get('/logout', (req,res) => {
     req.logout();
     req.flash('success_msg', 'you are logged out');
-    res.redirect('/users/login')
+    res.redirect('/')
 })
 
 module.exports = router;

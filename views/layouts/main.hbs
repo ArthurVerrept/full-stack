@@ -3,7 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/js/styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/xly2clb.css">
     <title>handle my bars</title>
+    <nav class="grid-container">
+        <a class="logo-link" href="/"> <h1 class="logo">LOGO</h1></a>
+        {{#if signIn}}
+        <div class="profile-link">
+            <a href="/dashboard">profile</a>
+        </div>
+        <div class="explore-link">
+            <a href="/">explore</a>
+        </div>
+        <div class="logout-form">
+            <a class="logout-link" href="/users/logout">logout</button></a>
+        </div>
+        {{else}}
+        <div class="explore-link">
+            <a href="/">explore</a>
+        </div>
+        <div class="login-form">
+            <form action="http://localhost:5000/users/login" method="POST">
+                <input class="login-field email" type="email" name="email" placeholder="Email" value="arthur-verrept@hotmail.co.uk" required>
+                <input class="login-field" type="password" name="password" placeholder="Password"value="aaaaaa" required>
+                <input class="login-button" type="submit" value="login" class="">
+                <p class="register-link">or <a href="/users/register">register</a></p>
+            </form>
+         </div>
+        {{#if error}}
+            <p>{{ error }}</p>
+        {{/if}}
+        {{/if}}
+
+    </nav>
 </head>
 <body>
     {{!-- this is a placeholder --}}

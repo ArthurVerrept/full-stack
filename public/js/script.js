@@ -1,11 +1,9 @@
 const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
-var items;
 //This Script makes a fetch (essential a GET Http) request to the server
 const clothesList = document.getElementById('clothesList');
 fetch('http://localhost:5000/dashboard/getClothes')
     .then(res => res.json())
     .then((item) => {
-        items = item;
         //.map() is used to cycle through the array, and a template literal is used to return HTML for
         //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
         let dataFeed = item.map((item) => {
@@ -132,43 +130,6 @@ fetch('http://localhost:5000/dashboard/getOutfits')
                 ` 
             }
             return currSend;
-
-
-
-
-
-
-
-            // return `
-            //     <br>
-            //     <div>
-            //         <p> type: ${outfit[0].type}</p>
-            //         <p> make: ${outfit[0].brand}</p>
-            //         <p> item: ${outfit[0].itemName}</p>
-            //     </div>
-            //     <hr>
-            //     <div>
-            //         <p> type: ${outfit[1].type}</p>
-            //         <p> make: ${outfit[1].brand}</p>
-            //         <p> item: ${outfit[1].itemName}</p>
-            //     </div>
-            //     <hr>
-            //     <div>
-            //         <p> type: ${outfit[2].type}</p>
-            //         <p> make: ${outfit[2].brand}</p>
-            //         <p> item: ${outfit[2].itemName}</p>
-            //     </div>
-            //     <hr>
-            //     <div>
-            //         <p> type: ${outfit[3].type}</p>
-            //         <p> make: ${outfit[3].brand}</p>
-            //         <p> item: ${outfit[3].itemName}</p>
-            //     </div>
-            //     <hr>
-            //     <hr>
-            //     <hr>
-
-            // `
         }).join('');
         outfitList.innerHTML = dataFeed;
     })

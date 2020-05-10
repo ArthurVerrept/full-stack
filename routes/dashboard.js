@@ -25,7 +25,13 @@ const Outfit = require('../models/Outfit.js');
 
 // render dashboard view and using second parameter ensureauthenticated to make sure user is loggin in or not
 router.get('/', ensureAuthenticated, (req, res) => {
-    res.render('dashboard', {layout: 'main', name: req.user.name})
+    // else render page as usual
+    if(req.user == undefined){
+        var bool = false;
+    } else {
+        bool = true;
+    }
+    res.render('dashboard', {layout: 'main', name: req.user.name, signIn: bool})
     //res.sendFile('/dashboard.html', {root: '/Users/mac/Desktop/Login/views'})
 });
 
@@ -43,8 +49,6 @@ var outfitIDs =[];
 var outfitKeys =[];
 
 var JSONsend = [];
-
-
     Item.find({userID: req.user._id}, (err, docs) => {
     }).then((itemDocs) => { 
         Outfit.find({userID: req.user._id}, (err, outfitDocs) => { 
@@ -143,6 +147,14 @@ router.post('/addOutfit', parser.any(), (req,res) => {
     })
     .then(() => {res.redirect('/dashboard')})
     .catch(err=>console.log(err));
+});
+
+
+router.get('/getAllOutfits', (req, res) => {
+    Outfit.find({}, (err, allOutfits) => { 
+        res.send(allOutfits)
+    })
+    .catch(err=>console.log(err))
 });
 
 module.exports = router;
