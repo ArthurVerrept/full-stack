@@ -11,22 +11,23 @@ a{
     text-decoration: none;
 }
 
-.grid-container{
-    display: grid;
-    grid-template-areas: 'left auto auto auto auto menu right';
-    justify-content: space-between;
-    padding-left: 30px;
-    padding-right: 30px;
+.nav-container{
+    padding: 10px 30px;
     background-color: #DDDDDD;
 }
 
+.right{
+    float:right;
+    background-color: #DDDDDD;
+    line-height:16px;
+}
+
 .logo{
-    margin-top:17%;
-    margin-bottom:20%;
     position: relative;
     font-family: quasimoda, sans-serif;
     font-weight: 800;
     font-style: italic;
+    line-height: 20px;
 }
 
 .logo-link{
@@ -35,8 +36,16 @@ a{
 
 .logout-form,
 .login-form{
-    grid-area: right;
-    position: relative;
+}
+
+.nav-li{
+    display: inline-block;
+}
+
+.nav-ul{
+    margin:0px;
+    padding:0px;
+    list-style-type: none;
 }
 
 .logout-link,
@@ -45,17 +54,13 @@ a{
     font-family: quasimoda, sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 20px;
+    font-size: 16px;
     background-color: #DDDDDD;
     border:none;
 }
 
-.login-button {
-    top:15px;
-}
-
-.logout-link{
-    top:15px;
+.loggedIn{
+    margin-top:3px;
 }
 
 .login-field{
@@ -79,8 +84,7 @@ a{
 .register-link{
     font-family: quasimoda, sans-serif;
     font-weight: 400;
-    font-style: normal;
-    font-size: 12px;
+    font-style: italic;
     margin:0px;
 }
 
@@ -92,18 +96,17 @@ a{
 
 .profile-link,
 .explore-link{
-    grid-area: menu;
-    display: inline;
+    font-family: quasimoda, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    margin-right:100px;
+    font-size: 16px;
 }
 
-.profile-link,
-.explore-link{
-    grid-area: menu;
-    display: inline;
-    top:20px;
-}
 
-.explore-link{
-    margin-left:150%;
+
+.profile-link:hover,
+.explore-link:hover{
+text-decoration: underline;
 }
 

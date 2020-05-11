@@ -11,7 +11,7 @@ router.get('/register', (req, res) => res.render('register', {layout: 'main'}))
 
 router.post('/register', (req, res) =>{
     // get post request
-    const {name, email, password, password2} =  req.body;
+    const {name, email, userName, password, password2} =  req.body;
 
     //errors array
     let errors = [];
@@ -19,6 +19,10 @@ router.post('/register', (req, res) =>{
     // Check required fields are full
     if(!name || !email || !password || !password2){
         errors.push({ msg: 'please fill in all fields' })
+    }
+
+    if(userName.includes(' ') == true){
+        errors.push({ msg: 'username cannot contain spaces' })
     }
 
     //check passwords match
@@ -36,15 +40,17 @@ router.post('/register', (req, res) =>{
         // render the page with errors and input values back into form 
         res.render('register', {layout: 'main', errors:errors, nameholder:name, emailholder: email});
     } else {
-        User.findOne({ email: email })
+        User.findOne({ $or:[{ email: email }, {userName, userName}]})
         .then(user => {
             if(user){
                 // if email exists
-                errors.push({ msg: ' Email already in use ' });
+                errors.push({ msg: 'Username or Email already in use ' });
                 res.render('register', {layout: 'main', errors:errors, nameholder:name, emailholder: email});
-            } else {
+            } 
+            else {
                 const newUser = new User({
                     name,
+                    userName,
                     email,
                     password
                 });

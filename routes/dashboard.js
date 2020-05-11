@@ -21,10 +21,12 @@ const parser = multer({ storage: storage });
 const { ensureAuthenticated } = require('../config/auth')
 
 const Item = require('../models/Clothes.js');
+const User = require('../models/Users.js');
 const Outfit = require('../models/Outfit.js');
 
 // render dashboard view and using second parameter ensureauthenticated to make sure user is loggin in or not
 router.get('/', ensureAuthenticated, (req, res) => {
+    console.log(req.user)
     // else render page as usual
     if(req.user == undefined){
         var bool = false;
@@ -108,7 +110,6 @@ router.post('/addOutfit', parser.any(), (req,res) => {
     const fit = { Accessories, Hats, Outerwear, Tops, Bottoms, FullBody, Shoes } = req.body;
     // get values from fit object
     var fitVals = Object.values(fit)
-
     var fitKeys = Object.keys(fit)
 
     // find all items from name and only from currently logged in user
@@ -134,6 +135,7 @@ router.post('/addOutfit', parser.any(), (req,res) => {
 
         const newOutfit = new Outfit({
             userID: req.user._id,
+            userName: req.user.userName,
             Accessories: sendFit.Accessories,
             Hats: sendFit.Hats,
             Outerwear: sendFit.Outerwear,

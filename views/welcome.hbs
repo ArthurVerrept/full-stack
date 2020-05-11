@@ -1,11 +1,15 @@
-    <h1>Welcome</h1>
-    <div id="outfitList">
 
+    <div class="grid" style="border:2px solid black; margin: 0 20vw">
 
+            <div id="outfitList" >
+
+            </div>
     </div>
-
-
+<script src="/js/masonry.pkgd.min.js "></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script>
+
+
 
     //This Script makes a fetch (essential a GET Http) request to the server
 const outfitList = document.getElementById('outfitList');
@@ -14,15 +18,34 @@ fetch('http://localhost:5000/dashboard/getAllOutfits')
     .then((outfits) => {
         console.log(outfits)
         let dataFeed = outfits.map((outfits) => {
+
+            // math to add q_60 into string
+            String.prototype.splice = function(idx, rem, str) {
+                return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+            };
+
+            // setting image quality to 60% for retriveal from cloudinary for faster page load times
+            var str ='';
+            str = outfits.ImageURL;
+            var pos = str.indexOf('upload/')+6;
+            var url = str.splice(pos, 0, '/q_60');
+
             return `
-            <br>
-            <div>
-                <img src="${outfits.ImageURL}">
+            <div style="overflow:hidden; padding: 0.2vw" class="grid-item">
+                <a href="/p/${outfits.userName}"><img style="object-fit: fill; width:14.5vw; margin: 0 auto;" src="${url}"></a>
             </div>
-            <hr>
         `
         }).join('');
         //console.log(dataFeed)
         outfitList.innerHTML = dataFeed;
-    });
+    }).then(()=>{
+        var grid = document.querySelector('.grid');
+        var msnry;
+            imagesLoaded( grid, function() {
+            // init Isotope after all images have loaded
+            msnry = new Masonry( grid, {
+                itemSelector: '.grid-item',
+            });
+        });
+    })
 </script>
