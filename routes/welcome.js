@@ -70,37 +70,75 @@ router.get('/p/:userName/:_id' , (req, res) => {
                 Outfit.find({_id: ID}, (err, outfitDocs) => { 
                 }).then((fit)=>{
                     if(!fit[0]){
-                        
                         // INSERT ERROR PAGE HERE
                         console.log('no fit lol')
                     } else {
-                        console.log(' fit exists')
+                        res.render('public', {layout:'main', user: name})
                     }
                 });
             }
         }
     })
-    res.render('public', {layout:'main', user: name})
 });
 
 router.get('/p/:userName/:_id/getUserInfo' , (req, res) => {
-    // extracting name and ID from URL
+    // extracting ID from URL
     var strName = url.parse(req.url).pathname
     var posName = strName.indexOf('/');
     var tempName = strName.splice(posName, 3, '');
+    var strID = tempName;
 
-    var idUse = tempName;
-    var strID = idUse;
-    var posID = strID.indexOf(`${name}`);
-    var ID = strID.splice(posID, name.length + 1,'');
-//     var str = url.parse(req.url).pathname
-//     var pos = str.indexOf('/');
-//     var tempName = str.splice(pos, 3, '');
+    var posUserName = tempName.indexOf('/');
+    var userName = tempName.splice(posUserName, 1000, '');
+
+    var posID = strID.indexOf(`/`);
+    var tempID = strID.splice(0, posID + 1,'');
+    var posIDremove = tempID.indexOf(`/getUserInfo`);
+    var ID = tempID.splice(posIDremove, 12,'');
+
+
+User.find({userName: userName}, (err, user) => {})
+.then((user)=> {
+    Item.find({userID: user[0]._id}, (err, userItems) => {})
+    .then((userItems) => {
+        Outfit.findOne({_id: ID}, (err, user) => {})
+        .then((outfit) => {
+            fit = {};
+            var keys = Object.keys(outfit._doc);
+            var values = Object.values(outfit._doc);
+            // for every item in the outfit
+            for (let i = 0; i < keys.length; i++) {
+                if(keys[i] != undefined && keys[i] != '_id' && keys[i] != 'userID' && keys[i] != 'userName' && keys[i] != 'date' && keys[i] != '__v'){
+                    if(values[i] != 'none' && keys[i] != 'ImageURL'){
+                        for (let x = 0; x < userItems.length; x++) {
+                            if(userItems[x]._id == values[i]){
+                                fit[keys[i]] = {
+                                    brand: userItems[x].brand,
+                                    itemName: userItems[x].itemName
+                                };
+                            }
+                        }
+                    } else if (keys[i] == 'ImageURL'){
+                        fit[keys[i]] =  values[i];
+                    } else {
+                        fit[keys[i]] = {
+                            brand: 'none',
+                            itemName: 'none'
+                        };
+                    }
+                }
+            }
+            res.send(fit)
+        })
+    })
+})
+        
+        
+
+
+
+
     
-//     var pos2 = tempName.indexOf('/g');
-//     var name = tempName.splice(pos2, 12, '');
-
-//     //console.log(name);
 //     User.find({userName: name}, (err, user) => {})
 //     .then((user)=>{
 //     var userInf = user[0];
@@ -147,7 +185,7 @@ router.get('/p/:userName/:_id/getUserInfo' , (req, res) => {
 //         .catch(err=>console.log(err))
 //     })
 // })
-})
+});
 
 module.exports = router;
 

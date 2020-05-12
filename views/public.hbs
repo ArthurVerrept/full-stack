@@ -5,6 +5,10 @@
     <p>{{ success_msg }}</p>
 {{/if}}
 
+<div style="margin-left:20px" class='displayOutfit'>
+
+</div>
+
 
 <div id="picMe" class="row"></div>
 <div id="clothesList" class="row"></div>
@@ -19,17 +23,40 @@ var x = document.querySelector(".username").innerText;
 
 // remove @
 var pos = x.indexOf('@');
-var name = x.splice(pos, 1, '');
+var userName = x.splice(pos, 1, '');
 
+// get url pathname and remove /p/username to be left with outfitID
+var posName = window.location.pathname.indexOf(`/p/${userName}/`);
+var fitID = window.location.pathname.splice(posName, 4 + userName.length, '');
 
-const outfitList = document.getElementById('outfitList');
+const outfit = document.querySelector('.displayOutfit');
 
-// create fetch req with username
-//fetch(`http://localhost:5000/p/${name}/${id}/getUserInfo`)
-//.then(res => res.json())
-  //  .then((all) => {
-        //console.log(all);
-    //});
+ //create fetch req with username
+fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
+.then(res => res.json())
+.then((outfits) => {
+    var keys = Object.keys(outfits)
+    var vals = Object.values(outfits)
+    let dataFeed = ``;
+
+    for (let i = 0; i < keys.length; i++) {
+        console.log(keys[i], vals[i])
+        if(vals[i].brand == 'none' && keys[i] != 'ImageURL'){
+        } else if(keys[i] == 'ImageURL') {
+            dataFeed += `
+                <img src="${vals[i]}" alt="${vals[i]}">
+            `
+        } else {
+            dataFeed += `
+                <p>${vals[i].brand} </p>
+                <p>${vals[i].itemName} </p>
+            `
+        }
+    }
+
+    
+    outfit.innerHTML = dataFeed;
+});
 </script>
 {{!-- {{else}} --}}
 {{!-- <p>dont try that shit</p> --}}

@@ -35,7 +35,6 @@ const outfitList = document.getElementById('outfitList');
 fetch('http://localhost:5000/dashboard/getOutfits')
     .then(res => res.json())
     .then((outfits) => {
-        console.log(outfits)
         // console.log(outfits)
         // //.map() is used to cycle through the array, and a template literal is used to return HTML for
         // //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
