@@ -1,9 +1,8 @@
 
-    <div class="grid" style="border:2px solid black; margin: 0 20vw">
+<div class="grid">
+        <div id="outfitList" >
 
-            <div id="outfitList" >
-
-            </div>
+        </div>
     </div>
 <script src="/js/masonry.pkgd.min.js "></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
@@ -31,8 +30,8 @@ fetch('http://localhost:5000/dashboard/getAllOutfits')
             var url = str.splice(pos, 0, '/q_60');
 
             return `
-            <div style="overflow:hidden; padding: 0.2vw" class="grid-item">
-                <a href="/p/${outfits.userName}/${outfits._id}"><img style="object-fit: fill; width:14.5vw; margin: 0 auto;" src="${url}"></a>
+            <div class="grid-item">
+                <a href="/p/${outfits.userName}/${outfits._id}"><img class="welcomeOutfitImages" src="${url}"></a>
             </div>
         `
         }).join('');
