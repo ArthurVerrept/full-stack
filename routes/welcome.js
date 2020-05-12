@@ -28,7 +28,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/p/:userName/:_id' , (req, res) => {
-
     // extracting name and ID from URL
     var strName = url.parse(req.url).pathname
     var posName = strName.indexOf('/');

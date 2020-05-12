@@ -5,8 +5,11 @@
     <p>{{ success_msg }}</p>
 {{/if}}
 
-<div class='displayOutfit'>
+<div style="margin-left:20px" class='displayOutfit'>
+
 </div>
+
+
 <div id="picMe" class="row"></div>
 <div id="clothesList" class="row"></div>
 <script>
@@ -41,7 +44,7 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
         if(vals[i].brand == 'none' && keys[i] != 'ImageURL'){
         } else if(keys[i] == 'ImageURL') {
             dataFeed += `
-                <img class="publicOutfitImage" src="${vals[i]}" alt="${vals[i]}">
+                <img src="${vals[i]}" src="${vals[i]}">
             `
         } else {
             dataFeed += `
