@@ -32,7 +32,7 @@ fetch('http://localhost:5000/dashboard/getAllOutfits')
 
             return `
             <div style="overflow:hidden; padding: 0.2vw" class="grid-item">
-                <a href="/p/${outfits.userName}"><img style="object-fit: fill; width:14.5vw; margin: 0 auto;" src="${url}"></a>
+                <a href="/p/${outfits.userName}/${outfits._id}"><img style="object-fit: fill; width:14.5vw; margin: 0 auto;" src="${url}"></a>
             </div>
         `
         }).join('');

@@ -1,0 +1,37 @@
+{{!-- {{#if length}} --}}
+<p class="username">@{{user}}</p>
+
+{{#if success_msg}}
+    <p>{{ success_msg }}</p>
+{{/if}}
+
+
+<div id="picMe" class="row"></div>
+<div id="clothesList" class="row"></div>
+<script>
+
+String.prototype.splice = function(idx, rem, str) {
+    return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+};
+
+// get username from page from handlebars
+var x = document.querySelector(".username").innerText;
+
+// remove @
+var pos = x.indexOf('@');
+var name = x.splice(pos, 1, '');
+
+
+const outfitList = document.getElementById('outfitList');
+
+// create fetch req with username
+//fetch(`http://localhost:5000/p/${name}/${id}/getUserInfo`)
+//.then(res => res.json())
+  //  .then((all) => {
+        //console.log(all);
+    //});
+</script>
+{{!-- {{else}} --}}
+{{!-- <p>dont try that shit</p> --}}
+{{!-- {{/if}} --}}
+

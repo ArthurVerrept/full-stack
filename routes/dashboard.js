@@ -46,7 +46,6 @@ router.get('/getClothes', (req, res) => {
 });
 
 router.get('/getOutfits', (req, res) => {
-
 var outfitIDs =[];
 var outfitKeys =[];
 
