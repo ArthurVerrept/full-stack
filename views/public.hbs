@@ -11,15 +11,25 @@
 
     <div class='public grid-item right grid-profile-container'>
         <div class='public user'>
-            <div class='public profilepic-div'>
-                <img class='public profile-image' src='' alt=''>
+            <div class="profile-grid-item">
+                <div class='public profilepic-div'>
+                    <img class='public profile-image' src='' alt=''>
+                </div>
+                <p class='public username'>@{{user}}</p>
             </div>
-            <p class='public username'>@{{user}}</p>
+            <div class='public post-amount'>
+            </div> 
+        </div>
+        <div class="public profile-outfits-container">
+                <div class="public profile-outfits">
+                    
+                </div>
         </div>
     </div>
     <div class="public grid-item right"></div>
 </div>
-
+<script src="/js/masonry.pkgd.min.js "></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script>
 
 String.prototype.splice = function(idx, rem, str) {
@@ -61,8 +71,9 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
         } else if (keys[i] != 'profileURL') {
             dataFeed += `
             <div class=public-item>
-                <p class="public-itemS">${vals[i].brand} </p>
-                <p class="public-itemS">${vals[i].itemName} </p>
+                <p class="public-itemS top type">${vals[i].type}: </p>
+                <p class="public-itemS top">${vals[i].brand} </p>
+                <p class="public-itemS bot">${vals[i].itemName} </p>
             </div>
             `
         }
@@ -73,6 +84,49 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
     outfitItems.innerHTML = dataFeed;
 
 
+});
+
+var postAmount = document.querySelector('.post-amount')
+var outfitDisplay = document.querySelector('.profile-outfits')
+fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
+.then(res => res.json())
+.then((outfits) => {
+    var posts = outfits.length;
+    let dataFeed = outfits.map((outfits) => {
+        // math to add q_60 into string
+        String.prototype.splice = function(idx, rem, str) {
+            return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+        };
+
+        // setting image quality to 60% for retriveal from cloudinary for faster page load times
+        var str ='';
+        str = outfits.ImageURL;
+        var pos = str.indexOf('upload/')+6;
+        var url = str.splice(pos, 0, '/q_60');
+
+        return `
+        <div class="profile-grid-item">
+            <a href="/p/${outfits.userName}/${outfits._id}"><img class="publicOutfitImages" src="${url}"></a>
+        </div>
+    `
+    }).join('');
+    //console.log(dataFeed)
+    outfitDisplay.innerHTML = dataFeed;
+
+    postAmount.innerHTML = `
+                            <p> ${posts}</p>
+                            <p>Posts</p> 
+                            `
+}).then(()=>{
+    var grid = document.querySelector('.profile-outfits-container');
+    var msnry;
+        imagesLoaded( grid, function() {
+        // init Isotope after all images have loaded
+        msnry = new Masonry( grid, {
+            itemSelector: '.profile-grid-item',
+            gutter:10
+        });
+    });
 });
 
 

@@ -234,19 +234,36 @@ text-decoration: underline;
 }
 
 .public.displayOutfitItems{
+    margin-top:auto;
+    margin-bottom:auto;
     padding-left: 20px;
     padding-right: 20px;
 }
 
 .public-item{
-    /* border:2px dotted black; */
-    margin-top:30px;
+    border-left:2px solid black; 
+    border-top:2px solid black;
+    margin-bottom:30px;
+    margin-right:10%;
 }
 
 .public-itemS{ 
     background:white;
     margin:0;
-    /* border:2px dotted black; */
+    padding-left:20px;
+}
+
+.public-itemS.top{ 
+    padding-top:20px;
+}
+
+.public-itemS.type{ 
+    color: #606060;
+    font-style: italic;
+}
+
+.public-itemS.bot{ 
+    padding-bottom:20px;
 }
 
 .public.chosen-fit{
@@ -256,47 +273,68 @@ text-decoration: underline;
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     grid-template-columns: 40% 1fr;
-    
 }
 
 .public.chosen-photo{
-    width:100%;
+    margin-top:30px;
+    width:120%;
 }
-
-
-
 
 .public.grid-item.right{
+    padding-top:25px;
     background-color:antiquewhite;
-}
-
-
-.public.grid-profile-container{
-    height:5000px;
-}
-
-.public.user{
-    margin:20px;
-}
-
-.public.profilepic-div{
-    overflow: hidden;
-    height: 90px;
-    width: 90px;
-    border-radius:50%;
-    border: 4px solid #DDDDDD;
-}
-.public.profile-image{
-    height: 110px;
-    position: relative;
 }
 
 .public.username{
     font-style: italic;
+    font-size: 22px;
     margin:0;
-    margin-top:10px;
+    margin-top:20px;
+    margin-bottom:30px;
 }
 
+
+.public.profilepic-div{
+    overflow: hidden;
+    height: 120px;
+    width: 120px;
+    border-radius:50%;
+    border: 4px solid #DDDDDD;
+}
+.public.profile-image{
+    height: 130px;
+    position: relative;
+}
+
+.public.user{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr); 
+    grid-template-columns: 1fr 0.5fr 0.5fr 2fr;
+    margin:20px;
+}
+
+.profile-grid-item{
+    margin-bottom:5px;
+    width:47%;
+}
+
+.publicOutfitImages{
+    width:100%;
+    
+}
+
+.profile-outfits-container{
+    margin-left:20px;
+}
+
+.post-amount{
+    margin-top:auto;
+    margin-bottom:auto;
+    text-align: center;
+}
+
+.post-amount{
+}
 /* PUBLIC PROFILES END */
 /*  */
 

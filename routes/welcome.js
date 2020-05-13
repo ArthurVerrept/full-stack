@@ -113,7 +113,8 @@ User.find({userName: userName}, (err, user) => {})
                             if(userItems[x]._id == values[i]){
                                 fit[keys[i]] = {
                                     brand: userItems[x].brand,
-                                    itemName: userItems[x].itemName
+                                    itemName: userItems[x].itemName,
+                                    type: userItems[x].type
                                 };
                             }
                         }
@@ -132,60 +133,34 @@ User.find({userName: userName}, (err, user) => {})
         })
     })
 })
-        
-        
 
-
-
-
-    
-//     User.find({userName: name}, (err, user) => {})
-//     .then((user)=>{
-//     var userInf = user[0];
-//     var outfitIDs =[];
-//     var outfitKeys =[];
-
-//     var JSONsend = [];
-//     Item.find({userID: userInf._id}, (err, docs) => {
-//     //console.log(docs)
-//     }).then((itemDocs) => { 
-//         Outfit.find({userID: userInf._id}, (err, outfitDocs) => { 
-//             for (let i = 0; i < outfitDocs.length; i++) {
-//                 outfitIDs.push(Object.values(outfitDocs[i]._doc)) 
-//                 outfitKeys.push(Object.keys(outfitDocs[i]._doc)) 
-//             }
-    
-//             // for every outfit
-//             for (let x = 0; x < outfitDocs.length; x++) {
-//                 var tempArray = [];
-//                 // look through every item id to match to item of clothing
-//                 for (let y = 0; y < outfitKeys[0].length; y++) {
-//                     if(outfitKeys[x][y] == '_id' || outfitKeys[x][y] == 'userID' || outfitKeys[x][y] == '__v' || outfitKeys[x][y] == 'date'){
-//                         //console.log('not one we want')
-//                     }
-//                     else if(outfitKeys[x][y] == 'ImageURL') {
-//                         tempArray.push({URL: outfitIDs[x][y]});
-//                     }
-//                     else if(outfitIDs[x][y] == 'none') {
-//                         tempArray.push({type: outfitKeys[x][y], itemName: 'none'});
-//                     }
-//                     else {
-//                         for (let z = 0; z < itemDocs.length; z++) {
-//                         if(itemDocs[z]._id.toString() == outfitIDs[x][y]){
-//                                 tempArray.push(itemDocs[z]);
-//                         }
-//                         } 
-//                     }
-//                 }
-//                 JSONsend[x] = tempArray
-//             }
-//             console.log(JSONsend)
-//             res.json(JSONsend)
-//         })
-//         .catch(err=>console.log(err))
-//     })
-// })
 });
+
+router.get('/p/:userName/:_id/getUserPics' , (req, res) => {
+     // extracting ID from URL
+     var strName = url.parse(req.url).pathname
+     var posName = strName.indexOf('/');
+     var tempName = strName.splice(posName, 3, '');
+     var strID = tempName;
+ 
+     var posUserName = tempName.indexOf('/');
+     var userName = tempName.splice(posUserName, 1000, '');
+
+    Outfit.find({userName: userName}, (err, fits) => {})
+    .then((fits)=>{
+        var fitSend = []
+        for (let i = 0; i < fits.length; i++) {
+            fitSend.push({
+                '_id': fits[i]._id,
+                'ImageURL': fits[i].ImageURL,
+                'userName': fits[i].userName
+            });
+        }
+        res.json(fitSend)
+    })
+
+});
+ 
 
 module.exports = router;
 
