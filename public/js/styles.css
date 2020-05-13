@@ -1,3 +1,4 @@
+/* NAV */
 body {
     margin: 0;
 }
@@ -11,9 +12,19 @@ a{
     text-decoration: none;
 }
 
+p{
+    font-family: quasimoda, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .nav-container{
     padding: 10px 30px;
     background-color: #DDDDDD;
+    position: -webkit-sticky;
+    position: sticky;
+    top:0%;
+    z-index: 1;
 }
 
 .right{
@@ -103,19 +114,26 @@ a{
     font-size: 16px;
 }
 
-
-
 .profile-link:hover,
 .explore-link:hover{
 text-decoration: underline;
 }
 
-.grid{
+.welcome.grid{
     border:2px solid black; 
     margin: 0 20vw
 }
 
-.grid-item{
+
+/* END NAV */
+/*  */
+
+
+
+/*  */
+/* REGISTER PAGE */
+
+.register.grid-item{
     overflow:hidden; 
 }
 
@@ -125,36 +143,165 @@ text-decoration: underline;
 }
 
 
-.grid-container{
+.register.grid-container{
     display: grid;
     justify-content: center;
-    margin-top:10%;
-    background-color: beige;
+    margin-top:10vw;
 }
 
-.grid-form{
+.register.grid-form{
     display:block;
     justify-content: center;
     text-align:center;
+    padding: 50px 150px 90px 150px;  
+    border: 5px solid #DDDDDD;
+    border-radius: 5px;
 }
 
 .form-item{
     text-align: center;
     margin-bottom:10px;
     font-size: 16px;
+    line-height: 30px;
+    width: 300px;
+    border-radius: 2px;
     font-family: quasimoda, sans-serif;
     font-weight: 400;
     font-style: normal;
+    border: none;
 }
+
+.register.errors{
+    margin-bottom:30px;
+    margin-top:30px;
+}
+
+.register.alert{
+    font-family: quasimoda, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom:10px;
+    text-decoration: underline;
+    text-decoration-style: double;
+    text-decoration-color: red;
+}
+
+.form-item.button{
+    background-color: #DDDDDD;
+    font-style: italic;
+}
+
 .image-upload{
+    margin: 20px auto;
+    overflow: hidden;
+    height: 100px;
+    width: 100px;
+    border-radius:50%;
+    border: 4px solid #DDDDDD;
+}
+
+.image-upload:hover{
+    transition-duration: 0.5s;
+    border: 4px solid #707070;
+}
+
+.registerImgUpload{
+    height:100px;
+    position: relative;
 }
 
 .image-upload>input {
     display: none;
   }
 
-.registerImgUpload{
-    width:100px;
-    margin-bottom:10px;
+/* REGISTER END */
+/*  */
+
+
+
+
+/*  */
+/* PUBLIC PROFILES */
+
+.public.grid-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+}
+
+.public.grid-item{
+    /* border:2px solid black; */
+}
+
+.public.displayOutfitItems{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.public-item{
+    /* border:2px dotted black; */
+    margin-top:30px;
+}
+
+.public-itemS{ 
+    background:white;
+    margin:0;
+    /* border:2px dotted black; */
+}
+
+.public.chosen-fit{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: 40% 1fr;
+    
+}
+
+.public.chosen-photo{
+    width:100%;
+}
+
+
+
+
+.public.grid-item.right{
+    background-color:antiquewhite;
+}
+
+
+.public.grid-profile-container{
+    height:5000px;
+}
+
+.public.user{
+    margin:20px;
+}
+
+.public.profilepic-div{
+    overflow: hidden;
+    height: 90px;
+    width: 90px;
+    border-radius:50%;
+    border: 4px solid #DDDDDD;
+}
+.public.profile-image{
+    height: 110px;
+    position: relative;
+}
+
+.public.username{
+    font-style: italic;
+    margin:0;
     margin-top:10px;
 }
+
+/* PUBLIC PROFILES END */
+/*  */
+
+
+
+
+/*  */
+/*  */

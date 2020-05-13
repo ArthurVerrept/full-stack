@@ -1,21 +1,25 @@
-    {{#if errors}}
-        {{#each errors}}
-            <div class="alert alert-danger">{{msg}}</div>
-        {{/each}}
-    {{/if}}
-    <div class="grid-container">
-        <form class="grid-item grid-form" action="http://localhost:5000/users/register" method="POST">
-        <div class="image-upload" id="main-cropper">
+     <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
+     <link href="https://unpkg.com/dropzone/dist/dropzone.css" rel="stylesheet"/>
+    <div class="register grid-container">
+        <form class="register grid-item grid-form" action="http://localhost:5000/users/register" method="POST" enctype="multipart/form-data">
+    <div class="register errors">
+        {{#if errors}}
+            {{#each errors}}
+            <div class="register alert alert-danger">{{msg}}</div>
+            {{/each}}
+        {{/if}}
+    </div>
+        <div class="image-upload">
             <label for="file-input">
-                <img class="registerImgUpload" src=""/>
+                <img class="registerImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1589318160/clothing-users-app/avatar_shxer0.png"/>
             </label>
-            <input id="file-input" type="file" onchange="readURL(this);"/>
+            <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
         </div>
         <div>
             <input class="form-item" type="text" name="name" placeholder="Enter Name" value="{{nameholder}}" require>
         </div>
         <div>
-            <input class="form-item" type="text" name="userName" placeholder="User name" value="{{nameholder}}" require>
+            <input class="form-item" type="text" name="userName" placeholder="User name" value="{{usernameholder}}" require>
         </div>
         <div>
             <input class="form-item" type="email" name="email" placeholder="Enter Email" value="{{emailholder}}" require>
@@ -27,22 +31,23 @@
             <input class="form-item" type="password" name="password2" placeholder="Confirm Password" require>
         </div>
         <div>
-            <input class="form-item" type="submit" value="Register" class="">
+            <input class="form-item button" type="submit" value="Register" class="">
         </div>
         </form>
     </div>
-
+  <script src="https://unpkg.com/cropperjs"></script>
+    <script src="https://unpkg.com/dropzone"></script>
     <script>
-
-        
-
-    </script>
-
-    {{!-- document.getElementById("file-input").onchange = function () {
+        document.getElementById("file-input").onchange = function () {
             var reader = new FileReader();
             reader.onload = function (e) {
                 // get loaded data and render thumbnail.
                 document.querySelector(".registerImgUpload").src = e.target.result;
+                document.querySelector(".registerImgUpload").style.height = "200px";
+                document.querySelector(".registerImgUpload").style.left = "0";
             };
             reader.readAsDataURL(this.files[0]);
-        }; --}}
+            var cropFile = this.files[0];
+            
+        };
+    </script>

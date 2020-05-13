@@ -56,21 +56,21 @@ router.get('/p/:userName/:_id' , (req, res) => {
         if(!user[0]){
 
             // INSERT ERROR PAGE HERE
-            console.log('user doesnt exists')
+            //console.log('user doesnt exists')
 
         } else{
-            console.log('user exists')
+            //console.log('user exists')
             if(ID.length != 24){
 
                 // INSERT ERROR PAGE HERE
-                console.log('wrong length babay lol')
+                //console.log('wrong length babay lol')
             }
             else{
                 Outfit.find({_id: ID}, (err, outfitDocs) => { 
                 }).then((fit)=>{
                     if(!fit[0]){
                         // INSERT ERROR PAGE HERE
-                        console.log('no fit lol')
+                        //console.log('no fit lol')
                     } else {
                         res.render('public', {layout:'main', user: name})
                     }
@@ -107,7 +107,7 @@ User.find({userName: userName}, (err, user) => {})
             var values = Object.values(outfit._doc);
             // for every item in the outfit
             for (let i = 0; i < keys.length; i++) {
-                if(keys[i] != undefined && keys[i] != '_id' && keys[i] != 'userID' && keys[i] != 'userName' && keys[i] != 'date' && keys[i] != '__v'){
+                if(keys[i] != undefined && keys[i] != '_id' && keys[i] != 'userID' && keys[i] != 'userName' && keys[i] != 'date' && keys[i] != '__v' && keys[i] != undefined){
                     if(values[i] != 'none' && keys[i] != 'ImageURL'){
                         for (let x = 0; x < userItems.length; x++) {
                             if(userItems[x]._id == values[i]){
@@ -127,6 +127,7 @@ User.find({userName: userName}, (err, user) => {})
                     }
                 }
             }
+            fit['profileURL'] = user[0].ImageURL;
             res.send(fit)
         })
     })

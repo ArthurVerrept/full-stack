@@ -1,17 +1,25 @@
-{{!-- {{#if length}} --}}
-<p class="username">@{{user}}</p>
+<div class='public grid-container'>
+    <div class="public grid-item left"></div>
+    <div class="public grid-item grid-chosen-container left">
+        <div class="public chosen-fit">
+            <div class='public displayOutfit grid-item'></div>
+            <div class='public displayOutfitItems grid-item'>
+            </div>
+        </div>
+    </div>
 
-{{#if success_msg}}
-    <p>{{ success_msg }}</p>
-{{/if}}
 
-<div style="margin-left:20px" class='displayOutfit'>
-
+    <div class='public grid-item right grid-profile-container'>
+        <div class='public user'>
+            <div class='public profilepic-div'>
+                <img class='public profile-image' src='' alt=''>
+            </div>
+            <p class='public username'>@{{user}}</p>
+        </div>
+    </div>
+    <div class="public grid-item right"></div>
 </div>
 
-
-<div id="picMe" class="row"></div>
-<div id="clothesList" class="row"></div>
 <script>
 
 String.prototype.splice = function(idx, rem, str) {
@@ -19,7 +27,7 @@ String.prototype.splice = function(idx, rem, str) {
 };
 
 // get username from page from handlebars
-var x = document.querySelector(".username").innerText;
+var x = document.querySelector('.username').innerText;
 
 // remove @
 var pos = x.indexOf('@');
@@ -29,34 +37,45 @@ var userName = x.splice(pos, 1, '');
 var posName = window.location.pathname.indexOf(`/p/${userName}/`);
 var fitID = window.location.pathname.splice(posName, 4 + userName.length, '');
 
-const outfit = document.querySelector('.displayOutfit');
+
+const outfitPhoto = document.querySelector('.displayOutfit');
+const outfitItems = document.querySelector('.displayOutfitItems');
+const profilePic = document.querySelector('.profile-image');
 
  //create fetch req with username
 fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
 .then(res => res.json())
 .then((outfits) => {
+    console.log(outfits)
     var keys = Object.keys(outfits)
     var vals = Object.values(outfits)
     let dataFeed = ``;
 
     for (let i = 0; i < keys.length; i++) {
         console.log(keys[i], vals[i])
-        if(vals[i].brand == 'none' && keys[i] != 'ImageURL'){
+        if(vals[i].brand == 'none' && keys[i] != 'ImageURL' && keys[i] != 'profileURL'){
         } else if(keys[i] == 'ImageURL') {
-            dataFeed += `
-                <img src="${vals[i]}" src="${vals[i]}">
+            dataFeedPhoto = `
+                <img class="public chosen-photo" src='${vals[i]}' src='${vals[i]}'>
             `
-        } else {
+        } else if (keys[i] != 'profileURL') {
             dataFeed += `
-                <p>${vals[i].brand} </p>
-                <p>${vals[i].itemName} </p>
+            <div class=public-item>
+                <p class="public-itemS">${vals[i].brand} </p>
+                <p class="public-itemS">${vals[i].itemName} </p>
+            </div>
             `
         }
     }
+    profilePic.src = outfits.profileURL
 
-    
-    outfit.innerHTML = dataFeed;
+    outfitPhoto.innerHTML = dataFeedPhoto;
+    outfitItems.innerHTML = dataFeed;
+
+
 });
+
+
 </script>
 {{!-- {{else}} --}}
 {{!-- <p>dont try that shit</p> --}}

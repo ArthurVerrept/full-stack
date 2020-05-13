@@ -2,6 +2,23 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport')
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+
+const config = require('../config/config');
+
+cloudinary.config({
+    cloud_name: config.CLOUD_NAME,
+    api_key: config.API_KEY,
+    api_secret: config.API_SECRET
+  });
+    const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "clothing-users-app",
+    allowedFormats: ["jpg", "png"]
+  });
+const parser = multer({ storage: storage });
 
 // user model
 const User = require('../models/Users.js');
@@ -9,7 +26,7 @@ const User = require('../models/Users.js');
 //register page
 router.get('/register', (req, res) => res.render('register', {layout: 'main'}))
 
-router.post('/register', (req, res) =>{
+router.post('/register', parser.any(), (req, res) =>{
     // get post request
     const {name, email, userName, password, password2} =  req.body;
 
@@ -18,41 +35,42 @@ router.post('/register', (req, res) =>{
 
     // Check required fields are full
     if(!name || !email || !password || !password2){
-        errors.push({ msg: 'please fill in all fields' })
+        errors.push({ msg: 'Please fill in all fields' })
     }
 
     if(userName.includes(' ') == true){
-        errors.push({ msg: 'username cannot contain spaces' })
+        errors.push({ msg: 'Username cannot contain spaces' })
     }
 
     //check passwords match
     if(password != password2){
-        errors.push({ msg: 'passwords do not match' })
+        errors.push({ msg: 'Passwords do not match' })
     }
 
     //check password length
     if(password.length < 6){
-        errors.push({ msg: 'passwords should be at least 6 characters' })
+        errors.push({ msg: 'Passwords should be at least 6 characters' })
     }
 
     // if any errors in array
     if(errors.length > 0){
         // render the page with errors and input values back into form 
-        res.render('register', {layout: 'main', errors:errors, nameholder:name, emailholder: email});
+        res.render('register', {layout: 'main', errors:errors, nameholder:name, usernameholder: userName, emailholder: email});
     } else {
         User.findOne({ $or:[{ email: email }, {userName, userName}]})
         .then(user => {
             if(user){
                 // if email exists
                 errors.push({ msg: 'Username or Email already in use ' });
-                res.render('register', {layout: 'main', errors:errors, nameholder:name, emailholder: email});
+                res.render('register', {layout: 'main', errors:errors, nameholder:name, usernameholder: userName, emailholder: email});
             } 
             else {
                 const newUser = new User({
                     name,
                     userName,
                     email,
-                    password
+                    password,
+                    ImageURL: req.files[0].url
                 });
                 
                 // hash password
