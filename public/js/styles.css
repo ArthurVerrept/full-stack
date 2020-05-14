@@ -315,7 +315,7 @@ text-decoration: underline;
 
 .profile-grid-item{
     margin-bottom:5px;
-    width:47%;
+    width:49%;
 }
 
 .publicOutfitImages{
@@ -325,16 +325,72 @@ text-decoration: underline;
 
 .profile-outfits-container{
     margin-left:20px;
+    background-color:antiquewhite
+    
 }
 
+.public.profile-outfits{
+    background-color: antiquewhite;
+}
+
+.item-amount,
 .post-amount{
-    margin-top:auto;
+    margin-top:40px;
+}
+
+
+.post-item-amount,
+.post-amount-text{
+    margin:5px;
+    font-size: 24px;
+    font-style: italic;
     margin-bottom:auto;
     text-align: center;
 }
 
-.post-amount{
+.post-item-amount.post,
+.post-amount-text.post{
+    margin:8px;
+    font-size: 16px;
 }
+
+.public.profile-view-choice{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid black;
+    margin-right:50px;
+    margin-left:50px;
+}
+
+.public.profile-view-select{
+    transition-duration: 1s;
+    text-align: center;
+    color: black;
+}
+
+.profile-view-select p:hover{
+    cursor: pointer;
+}
+
+.profile-grid-item-clothing{
+    margin-top:40px;
+    margin-bottom:40px;
+    padding:20px;
+    background-color: white;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+}
+.profile-grid-item-clothing .type{
+    color: #606060;
+    font-style: italic;
+}
+
+.public.profile-view-select{
+    /* border: solid 2px black; */
+
+}
+
 /* PUBLIC PROFILES END */
 /*  */
 

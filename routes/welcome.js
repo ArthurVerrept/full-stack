@@ -129,6 +129,9 @@ User.find({userName: userName}, (err, user) => {})
                 }
             }
             fit['profileURL'] = user[0].ImageURL;
+            fit['values'] = {
+                clothes: userItems.length
+            }
             res.send(fit)
         })
     })
@@ -159,6 +162,88 @@ router.get('/p/:userName/:_id/getUserPics' , (req, res) => {
         res.json(fitSend)
     })
 
+});
+ 
+
+
+
+router.get('/p/:userName/:_id/getUserInfo' , (req, res) => {
+    // extracting ID from URL
+    var strName = url.parse(req.url).pathname
+    var posName = strName.indexOf('/');
+    var tempName = strName.splice(posName, 3, '');
+    var strID = tempName;
+
+    var posUserName = tempName.indexOf('/');
+    var userName = tempName.splice(posUserName, 1000, '');
+
+    var posID = strID.indexOf(`/`);
+    var tempID = strID.splice(0, posID + 1,'');
+    var posIDremove = tempID.indexOf(`/getUserInfo`);
+    var ID = tempID.splice(posIDremove, 12,'');
+
+
+User.find({userName: userName}, (err, user) => {})
+.then((user)=> {
+    Item.find({userID: user[0]._id}, (err, userItems) => {})
+    .then((userItems) => {
+        Outfit.findOne({_id: ID}, (err, user) => {})
+        .then((outfit) => {
+            fit = {};
+            var keys = Object.keys(outfit._doc);
+            var values = Object.values(outfit._doc);
+            // for every item in the outfit
+            for (let i = 0; i < keys.length; i++) {
+                if(keys[i] != undefined && keys[i] != '_id' && keys[i] != 'userID' && keys[i] != 'userName' && keys[i] != 'date' && keys[i] != '__v' && keys[i] != undefined){
+                    if(values[i] != 'none' && keys[i] != 'ImageURL'){
+                        for (let x = 0; x < userItems.length; x++) {
+                            if(userItems[x]._id == values[i]){
+                                fit[keys[i]] = {
+                                    brand: userItems[x].brand,
+                                    itemName: userItems[x].itemName,
+                                    type: userItems[x].type
+                                };
+                            }
+                        }
+                    } else if (keys[i] == 'ImageURL'){
+                        fit[keys[i]] =  values[i];
+                    } else {
+                        fit[keys[i]] = {
+                            brand: 'none',
+                            itemName: 'none'
+                        };
+                    }
+                }
+            }
+            fit['profileURL'] = user[0].ImageURL;
+            res.send(fit)
+        })
+    })
+})
+
+});
+
+router.get('/p/:userName/:_id/getUserItems' , (req, res) => {
+    var strName = url.parse(req.url).pathname
+    var posName = strName.indexOf('/');
+    var tempName = strName.splice(posName, 3, '');
+    var strID = tempName;
+
+    var posUserName = tempName.indexOf('/');
+    var userName = tempName.splice(posUserName, 1000, '');
+
+    var posID = strID.indexOf(`/`);
+    var tempID = strID.splice(0, posID + 1,'');
+    var posIDremove = tempID.indexOf(`/getUserInfo`);
+    var ID = tempID.splice(posIDremove, 12,'');
+
+    User.find({userName: userName}, (err, user) => {})
+    .then((user)=> {
+        Item.find({userID: user[0]._id}, (err, fits) => {})
+        .then((fits)=>{
+            res.json(fits)
+        })
+    })
 });
  
 

@@ -19,10 +19,22 @@
             </div>
             <div class='public post-amount'>
             </div> 
+            <div class='public item-amount'>
+            </div>
         </div>
+
+        <div class="public profile-view-choice">
+            <div class="public profile-view-select outfits-view">   
+                <p class="public outfits-button" onclick="getOutfits()">outfits</p>
+            </div>
+            <div class=" public profile-view-select items-view">
+                <p class="public wardrobe-button" onclick="getWardrobe()">wardrobe</p>
+            </div>
+        </div>
+
+
         <div class="public profile-outfits-container">
-                <div class="public profile-outfits">
-                    
+                <div class="public profile-outfits">   
                 </div>
         </div>
     </div>
@@ -32,6 +44,8 @@
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script>
 
+var clothesAmount = '0';
+var postsAmount = '0';
 String.prototype.splice = function(idx, rem, str) {
     return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
 };
@@ -51,24 +65,30 @@ var fitID = window.location.pathname.splice(posName, 4 + userName.length, '');
 const outfitPhoto = document.querySelector('.displayOutfit');
 const outfitItems = document.querySelector('.displayOutfitItems');
 const profilePic = document.querySelector('.profile-image');
-
- //create fetch req with username
 fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
 .then(res => res.json())
 .then((outfits) => {
+    //
+    clothesAmount = outfits.values.clothes.toString();
     console.log(outfits)
     var keys = Object.keys(outfits)
     var vals = Object.values(outfits)
     let dataFeed = ``;
 
+    var itemsAmount = document.querySelector('.item-amount')
+
+    itemsAmount.innerHTML = `
+                                <p class="post-item-amount">${clothesAmount}</p> 
+                                <p class="post-item-amount post">Items</p> `
+
     for (let i = 0; i < keys.length; i++) {
         console.log(keys[i], vals[i])
-        if(vals[i].brand == 'none' && keys[i] != 'ImageURL' && keys[i] != 'profileURL'){
+        if(vals[i].brand == 'none' && keys[i] != 'ImageURL' && keys[i] != 'profileURL' && keys[i] != 'values'){
         } else if(keys[i] == 'ImageURL') {
             dataFeedPhoto = `
                 <img class="public chosen-photo" src='${vals[i]}' src='${vals[i]}'>
             `
-        } else if (keys[i] != 'profileURL') {
+        } else if (keys[i] != 'profileURL' && keys[i] != 'values') {
             dataFeed += `
             <div class=public-item>
                 <p class="public-itemS top type">${vals[i].type}: </p>
@@ -86,12 +106,21 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
 
 });
 
+getOutfits();
+
+
+
+function getOutfits(){
+document.querySelector('.public .outfits-button').style.fontStyle = 'italic';
+document.querySelector('.public .outfits-button').innerHTML = 'outfits.';
+document.querySelector('.public .wardrobe-button').style.fontStyle = 'normal';
+document.querySelector('.public .wardrobe-button').innerHTML = 'wardrobe';
 var postAmount = document.querySelector('.post-amount')
 var outfitDisplay = document.querySelector('.profile-outfits')
 fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
 .then(res => res.json())
 .then((outfits) => {
-    var posts = outfits.length;
+    postsAmount = outfits.length;
     let dataFeed = outfits.map((outfits) => {
         // math to add q_60 into string
         String.prototype.splice = function(idx, rem, str) {
@@ -114,10 +143,11 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
     outfitDisplay.innerHTML = dataFeed;
 
     postAmount.innerHTML = `
-                            <p> ${posts}</p>
-                            <p>Posts</p> 
+                            <p class="post-amount-text"> ${postsAmount}</p>
+                            <p class="post-amount-text post">Posts</p> 
                             `
 }).then(()=>{
+    
     var grid = document.querySelector('.profile-outfits-container');
     var msnry;
         imagesLoaded( grid, function() {
@@ -128,7 +158,39 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
         });
     });
 });
+}
 
+
+window.addEventListener('resize', ()=>{
+    console.log('yo')
+});
+                    
+
+
+function getWardrobe(){
+document.querySelector('.public .profile-outfits-container').style.height = '100%';
+document.querySelector('.public .outfits-button').style.fontStyle = 'normal';
+document.querySelector('.public .outfits-button').innerHTML = 'outfits';
+document.querySelector('.public .wardrobe-button').style.fontStyle = 'italic';
+document.querySelector('.public .wardrobe-button').innerHTML = 'wardrobe.';
+var outfitDisplay = document.querySelector('.profile-outfits')
+fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserItems`)
+.then(res => res.json())
+.then((items) => {
+    console.log(items.length)
+    //var posts = outfits.length;
+    let dataFeed = items.map((items) => {
+        return `
+        <div class="profile-grid-item-clothing">
+            <p class="type"> ${items.type} </p>
+            <p> ${items.brand}: ${items.itemName} </p>
+        </div>
+    `
+    }).join('');
+    //console.log(dataFeed)
+    outfitDisplay.innerHTML = dataFeed;
+    })
+}
 
 </script>
 {{!-- {{else}} --}}
