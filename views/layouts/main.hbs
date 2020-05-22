@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/js/styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/xly2clb.css">
+    <script src="https://kit.fontawesome.com/0e3529bb94.js" crossorigin="anonymous"></script>
     <title>handle my bars</title>
+    {{!-- <meta 
+        name='viewport' 
+        content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
+    /> --}}
+
 
     {{#if signIn}}
     <nav class="nav-container">
+    <div onclick='append()' class="hamburger" type="button">
+        <div class="burger-line top"></div>
+        <div class="burger-line mid"></div>
+        <div class="burger-line bot"></div>
+    </div>
         <ul class="nav-ul">
             <li class="nav-li">
                 <a class="logo-link" href="/"> <h1 class="logo">fraiment</h1></a>
@@ -36,17 +47,22 @@
     </nav>
     {{else}}
     <nav class="nav-container">
+    <div onclick='append()' class="hamburger" type="button">
+        <div class="burger-line top"></div>
+        <div class="burger-line mid"></div>
+        <div class="burger-line bot"></div>
+    </div>
         <ul class="nav-ul">
             <li class="nav-li">
                 <a class="logo-link" href="/"> <h1 class="logo">fraiment</h1></a>
             </li>
             <li class="nav-li right">
                 <ul>
-                    <li class="nav-li">
+                    {{!-- <li class="nav-li">
                         <div class="explore-link">
                             <a href="/">explore</a>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-li">
                         <p class="register-link"><a href="/users/register">register</a>  or</p>
                     </li>
@@ -63,14 +79,29 @@
             </li>
         </ul>
         {{#if error}}
-            <p>{{ error }}</p>
+            <p style="right:0px; text-align:right">{{ error }}</p>
         {{/if}}
     </nav>
-    {{/if}}
-
+{{/if}}
 </head>
 <body>
+
     {{!-- this is a placeholder --}}
     {{{body}}}
+
+
 </body>
+    <script>
+        function append(){
+            if(!document.querySelector('.is-active')){
+                document.querySelector('.hamburger').classList.add('is-active')   
+                document.querySelector('.nav-li.right').style.display = 'block'
+    
+            }else{
+                document.querySelector('.hamburger').classList.remove('is-active')   
+                document.querySelector('.nav-li.right').style.display = 'none'
+            }
+            
+        }
+    </script>
 </html>

@@ -28,6 +28,11 @@ router.get('/', (req, res) => {
 })
 
 router.get('/p/:userName/:_id' , (req, res) => {
+    if(req.user == undefined){
+        var bool = false;
+    } else {
+        bool = true;
+    }
     // extracting name and ID from URL
     var strName = url.parse(req.url).pathname
     var posName = strName.indexOf('/');
@@ -72,7 +77,7 @@ router.get('/p/:userName/:_id' , (req, res) => {
                         // INSERT ERROR PAGE HERE
                         //console.log('no fit lol')
                     } else {
-                        res.render('public', {layout:'main', user: name})
+                        res.render('public', {layout:'main', user: name, signIn: bool})
                     }
                 });
             }

@@ -26,14 +26,13 @@ const Outfit = require('../models/Outfit.js');
 
 // render dashboard view and using second parameter ensureauthenticated to make sure user is loggin in or not
 router.get('/', ensureAuthenticated, (req, res) => {
-    console.log(req.user)
     // else render page as usual
     if(req.user == undefined){
         var bool = false;
     } else {
         bool = true;
     }
-    res.render('dashboard', {layout: 'main', name: req.user.name, signIn: bool})
+    res.render('dashboard', {layout: 'main', name: req.user.name, signIn: bool, img: req.user.ImageURL})
     //res.sendFile('/dashboard.html', {root: '/Users/mac/Desktop/Login/views'})
 });
 

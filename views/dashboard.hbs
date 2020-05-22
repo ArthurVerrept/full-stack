@@ -1,86 +1,275 @@
-<h1>dashboard</h1>
-<p>Welcome {{name}}</p>
+
 
 {{#if success_msg}}
     <p>{{ success_msg }}</p>
 {{/if}}
-<div class="col" style="width:200px !important; margin:0; position: absolute ">
-<h2>add item</h2>
-<form action="http://localhost:5000/dashboard/addItem" method="POST">
-    <p>type:</p>
-    <select type="text" name="type" id="">
-        <option value="Accessories">Accessories</option>
-        <option value="Hats">Hats</option>
-        <option value="Outerwear">Outerwear</option>
-        <option value="Tops">Tops</option>
-        <option value="Bottoms">Bottoms</option>
-        <option value="FullBody">Full Body</option>
-        <option value="Shoes">Shoes</option>
-    </select required>
 
-    <p>brand:</p>
-    <input type="text" name="brand" id="" required>
+<div class="profile main-grid-container">
+    <div class="profile main-grid-item"></div>
 
-    <p>item name:</p>
-    <input type="text" name="itemName" id=""required>
+    <div class="profile main-grid-item addItem">
+            <h2>Add Item</h2>
+            <form action="http://localhost:5000/dashboard/addItem" method="POST">
+                <p></p>
+                <select type="text" name="type" id="">
+                    <option value="Accessories">Accessories</option>
+                    <option value="Hats">Hats</option>
+                    <option value="Outerwear">Outerwear</option>
+                    <option value="Tops">Tops</option>
+                    <option value="Bottoms">Bottoms</option>
+                    <option value="FullBody">Full Body</option>
+                    <option value="Shoes">Shoes</option>
+                </select required>
 
-    <p>add picture?</p>
+                <p>brand:</p>
+                <input type="text" name="brand" id="" required>
 
-    <input type="submit" value="add clothing item!" class="">
-</form>
+                <p>item name:</p>
+                <input type="text" name="itemName" id=""required>
+                <br>
+                <input type="submit" value="add clothing item!" class="">
+            </form>
+        </div>
+
+        <div class="profile main-grid-item addItem">
+    
+            <h2>add Outfit</h2>
+            <form action="http://localhost:5000/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
+                <p>jpeg or png images only</p>
+                <input type="file" name="file" id="file" class="">
+                <p>Accessories:</p>
+                <select type="text" name="Accessories" id="accessorieSelect">
+                    <option value="none">None</option>
+                </select>
+                <p>Hat:</p>
+                <select type="text" name="Hats" id="hatSelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p>Outerwear:</p>
+                <select type="text" name="Outerwear" id="outerwearSelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p>Top:</p>
+                <select type="text" name="Tops" id="topSelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p>Bottom:</p>
+                <select type="text" name="Bottoms" id="bottomSelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p>Full Body:</p>
+                <select type="text" name="FullBody" id="fullbodySelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p>Shoes:</p>
+                <select type="text" name="Shoes" id="shoeSelect">
+                    <option value="none">None</option>
+                </select>
+
+                <input type="submit" value="Make Outfit" class="">
+            </form>
+    </div>
+
+
+
+
+    <div class="profile main-grid-item">
+        <p>Welcome {{name}}</p>
+            <div class='profile profilepic-div'>
+                <img class='profile-profile-image' src='{{img}}' alt=''>
+            </div>
+            <p class='profile username'>@{{name}}</p>
+            <div class='profile post-amount'></div>
+            <div class='profile item-amount'></div>
+        <div id="outfitList" class="profile outfit-list-container"></div>
+    </div>
 </div>
 
-
-<div class="col" style="width:200px !important; margin-left: 250px !important; padding:0">
-
-<h2>add Outfit</h2>
-
-
-<form action="http://localhost:5000/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
-<p>jpeg or png images only</p>
-<input type="file" name="file" id="file" class="">
-<p>Accessories:</p>
-<select type="text" name="Accessories" id="accessorieSelect">
-    <option value="none">None</option>
-</select>
-<p>Hat:</p>
-<select type="text" name="Hats" id="hatSelect">
-    <option value="none">None</option>
-</select>
-
-<p>Outerwear:</p>
-<select type="text" name="Outerwear" id="outerwearSelect">
-    <option value="none">None</option>
-</select>
-
-<p>Top:</p>
-<select type="text" name="Tops" id="topSelect">
-    <option value="none">None</option>
-</select>
-
-<p>Bottom:</p>
-<select type="text" name="Bottoms" id="bottomSelect">
-    <option value="none">None</option>
-</select>
-
-<p>Full Body:</p>
-<select type="text" name="FullBody" id="fullbodySelect">
-    <option value="none">None</option>
-</select>
-
-<p>Shoes:</p>
-<select type="text" name="Shoes" id="shoeSelect">
-    <option value="none">None</option>
-</select>
-
- <input type="submit" value="Make Outfit" class="">
-</form>
-</div>
-
-<div id="outfitList" class="col" style="width:200px !important; margin-left: 500px !important; padding:0"></div>
-
-<br>
-<hr>
-<div id="picMe" class="row"></div>
 <div id="clothesList" class="row"></div>
-<script src="/js/script.js"></script>
+<script>
+
+
+const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
+//This Script makes a fetch (essential a GET Http) request to the server
+const clothesAmount = document.getElementById('post-amount');
+const clothesList = document.getElementById('clothesList');
+fetch('http://localhost:5000/dashboard/getClothes')
+    .then(res => res.json())
+    .then((item) => {
+        clothesAmount.innerHTML = item.length
+        //.map() is used to cycle through the array, and a template literal is used to return HTML for
+        //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
+        let dataFeed = item.map((item) => {
+            return `
+            <br>
+            <div>
+                <p>${item.type}</p>
+                <p>${item.brand}</p>
+                <p>${item.itemName}</p>
+            </div>
+            <hr>
+        `
+        }).join('');
+        //console.log(dataFeed)
+        clothesList.innerHTML = dataFeed;
+        outfitSelect(item);
+    })
+    .catch(err => { throw err });
+
+
+
+//  
+// 
+// 
+
+const itemAmount = document.getElementById('item-amount');
+//This Script makes a fetch (essential a GET Http) request to the server
+const outfitList = document.getElementById('outfitList');
+fetch('http://localhost:5000/dashboard/getOutfits')
+    .then(res => res.json())
+    .then((outfits) => {
+        clothesNum = outfits.length;
+        var dataFeed;
+        dataFeed = outfits.map((outfit) => {
+            var currSend = ``;
+            if(outfit[7].URL != 'none'){
+                currSend += `<div class="profile img-container">`;
+                currSend += `
+                <div class="profile clothing-item-img">
+                    <img src="${outfit[7].URL}"> 
+                </div>
+                ` 
+                currSend += `</div>`;
+            }
+            currSend += `<div class="profile item-container">`;
+            if(outfit[0].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p> ${outfit[0].type}</p>
+                    <p> make: ${outfit[0].brand}</p>
+                    <p> item: ${outfit[0].itemName}</p>
+                </div>
+                `
+            }
+            if(outfit[1].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p> ${outfit[1].type}</p>
+                    <p> make: ${outfit[1].brand}</p>
+                    <p> item: ${outfit[1].itemName}</p>
+                </div>
+                ` 
+            }
+            if(outfit[2].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p>  ${outfit[2].type}</p>
+                    <p> make: ${outfit[2].brand}</p>
+                    <p> item: ${outfit[2].itemName}</p>
+                </div>
+                ` 
+            }
+            if(outfit[3].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p>  ${outfit[3].type}</p>
+                    <p> make: ${outfit[3].brand}</p>
+                    <p> item: ${outfit[3].itemName}</p>
+                </div>
+                ` 
+            }
+            if(outfit[4].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p>  ${outfit[4].type}</p>
+                    <p> make: ${outfit[4].brand}</p>
+                    <p> item: ${outfit[4].itemName}</p>
+                </div>
+                ` 
+            }
+            if(outfit[5].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p>  ${outfit[5].type}</p>
+                    <p> make: ${outfit[5].brand}</p>
+                    <p> item: ${outfit[5].itemName}</p>
+                </div>
+                ` 
+            }
+            if(outfit[6].itemName != 'none'){
+                currSend += `
+                <div class="profile clothing-item">
+                    <p>  ${outfit[6].type}</p>
+                    <p> make: ${outfit[6].brand}</p>
+                    <p> item: ${outfit[6].itemName}</p>
+                </div>
+                ` 
+            }
+            currSend += `</div>`;
+            return currSend;
+        }).join('');
+        outfitList.innerHTML = dataFeed;
+    })
+    .catch(err => { throw err });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function outfitSelect(item){
+    // go through each item of that first array column
+    for(var y = 0; y < item.length; y++) {
+        var selected;
+        var option = '';
+        var el;
+        if(item[y].type == 'Accessories'){
+            selected = document.getElementById('accessorieSelect');
+            option = item[y];
+
+        }
+        else if(item[y].type == 'Hats'){
+            selected = document.getElementById('hatSelect');
+            option = item[y];
+        }
+        else if(item[y].type == 'Outerwear'){
+            selected = document.getElementById('outerwearSelect');
+            option = item[y];
+        }
+        else if(item[y].type == 'Tops'){
+            selected = document.getElementById('topSelect');
+            option = item[y];
+        }
+        else if(item[y].type == 'Bottoms'){
+            selected = document.getElementById('bottomSelect');
+            option = item[y];
+        }
+        else if(item[y].type == 'FullBody'){
+            selected = document.getElementById('fullbodySelect');
+            option = item[y];
+        }
+        else if(item[y].type == 'Shoes'){
+            selected = document.getElementById('shoeSelect');
+            option = item[y];
+        }
+        if(option != ''){
+            el = document.createElement("option");
+            el.textContent = option.itemName;
+            selected.appendChild(el);
+        }
+    }
+}
+</script>
