@@ -37,6 +37,10 @@
                 <div class="public profile-outfits">   
                 </div>
         </div>
+         <div class="public profile-items-container">
+                <div class="public profile-outfits">   
+                </div>
+        </div>
     </div>
     <div class="public grid-item right"></div>
 </div>
@@ -111,12 +115,14 @@ getOutfits();
 
 
 function getOutfits(){
+document.querySelector('.profile-outfits-container').style.display = 'inherit';
+document.querySelector('.profile-items-container').style.display = 'none';
 document.querySelector('.public .outfits-button').style.fontStyle = 'italic';
 document.querySelector('.public .outfits-button').innerHTML = 'outfits.';
 document.querySelector('.public .wardrobe-button').style.fontStyle = 'normal';
 document.querySelector('.public .wardrobe-button').innerHTML = 'wardrobe';
 var postAmount = document.querySelector('.post-amount')
-var outfitDisplay = document.querySelector('.profile-outfits')
+var outfitDisplay = document.querySelector('.profile-outfits-container')
 fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
 .then(res => res.json())
 .then((outfits) => {
@@ -160,20 +166,17 @@ fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
 });
 }
 
-
-window.addEventListener('resize', ()=>{
-    console.log('yo')
-});
-                    
+          
 
 
 function getWardrobe(){
-document.querySelector('.public .profile-outfits-container').style.height = '100%';
+document.querySelector('.profile-outfits-container').style.display = 'none';
+document.querySelector('.profile-items-container').style.display = 'inherit';
 document.querySelector('.public .outfits-button').style.fontStyle = 'normal';
 document.querySelector('.public .outfits-button').innerHTML = 'outfits';
 document.querySelector('.public .wardrobe-button').style.fontStyle = 'italic';
 document.querySelector('.public .wardrobe-button').innerHTML = 'wardrobe.';
-var outfitDisplay = document.querySelector('.profile-outfits')
+var outfitDisplay = document.querySelector('.profile-items-container')
 fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserItems`)
 .then(res => res.json())
 .then((items) => {

@@ -78,10 +78,12 @@
                 </ul>
             </li>
         </ul>
+    </nav>
+     <div class="login-error">
         {{#if error}}
             <p style="right:0px; text-align:right">{{ error }}</p>
         {{/if}}
-    </nav>
+    </div>
 {{/if}}
 </head>
 <body>
@@ -92,6 +94,10 @@
 
 </body>
     <script>
+        if(document.querySelector('.login-error p') != null){
+            setTimeout(function(){document.querySelector('.login-error p').style.display = 'none'}, 2500)
+        }       
+
         function append(){
             if(!document.querySelector('.is-active')){
                 document.querySelector('.hamburger').classList.add('is-active')   
@@ -100,8 +106,7 @@
             }else{
                 document.querySelector('.hamburger').classList.remove('is-active')   
                 document.querySelector('.nav-li.right').style.display = 'none'
-            }
-            
+            } 
         }
     </script>
 </html>
