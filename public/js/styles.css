@@ -8,8 +8,15 @@ body {
 }
 
 h1{
+    font-family: quasimoda, sans-serif;
+    font-weight: 600;
     margin:0px;
 }
+
+input, select, button{
+    cursor: pointer;
+}
+
 
 h2{
     font-family: quasimoda, sans-serif;
@@ -424,8 +431,26 @@ text-decoration: underline;
 
 .profile.main-grid-container{
     display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+}
+.profile.add-select{
+    display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    grid-template-columns: 0.5fr 0.5fr 0.5fr 1fr 0.5fr;
+    grid-template-columns: 0.9fr 0.9fr 20%;
+}
+
+.profile.addOutfit-title,
+.profile.addItem-title{
+    font-size: 24px;
+    text-decoration-color: black !important;
+    cursor: pointer;
+    background-color:#DDDDDD;
+    width:95%; 
+    text-align: center;
+    height:42px;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .profile.main-grid-item.right{
@@ -434,14 +459,42 @@ text-decoration: underline;
     grid-template-columns:  1fr 1fr;
 }
 
-.profile.outfit-list-container{
+.image-upload{
+    margin: 20px auto;
+    overflow: hidden;
+    height: 100px;
+    width: 100px;
+    border-radius:50%;
+    border: 4px solid #DDDDDD;
+}
 
+.profile.p-image-upload{
+    margin-top:30px;
+}
+
+.profile.p-image-upload:hover{
+    transition-duration: 0.5s;
+}
+
+.profileImgUpload{
+    height:24px;
+    position: relative;
+}
+
+.p-image-upload>input {
+    display: none;
+  }
+
+
+  .profileImgUpload{
+    font-size: 24px;
+    overflow: hidden;
+    text-align: center;
 }
 
 .profile.clothing-item{
-    border-left:2px solid black;
-    border-bottom:2px solid black;
-    padding:10px;
+    margin-bottom:10px;
+    margin-left:10px;
 }
 
 .profile.clothing-item-img img{
@@ -460,9 +513,7 @@ text-decoration: underline;
 }
 
 .profile.img-container{
-    padding-top:20px;
-    padding-bottom:20px;
-    background-color: antiquewhite;
+
 }
 
 .profile.img-container img{
@@ -470,7 +521,6 @@ text-decoration: underline;
 }
 
 .profile.img-container{
-    border-top: 2px solid black;
     margin-top:20px;
 }
 
@@ -490,6 +540,25 @@ text-decoration: underline;
 .profile-profile-image{
     height:130px
 }
+
+
+.profile.main-grid-item.profile-part{
+    padding-left:20px;
+    background-color: antiquewhite;
+}
+
+
+.profile.view-choice{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: 1fr 1fr;
+}
+
+.profile.view-choice p{
+    text-align:center;
+    margin-bottom:0;
+}
+
 /* USER PROFILE END */
 /*  */
 
@@ -1019,4 +1088,103 @@ text-decoration: underline;
         grid-template-columns: repeat(5, 1fr); 
         grid-template-columns: 1.5fr 2fr 1.5fr;
     }
+
+    /* end of register */
+    /*  */
+
+    /*  */
+    /* PROFILE */
+
+    .profile.info-container{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    }
+    
+    .profile.addItem-text{
+        font-size: 14px;
+        margin-bottom:5px;
+    }
+
+    .profile.input{
+        border:1px solid black;
+        margin-bottom: 30px;
+        height:25px;
+        border-radius:4px;
+        width:80%;
+        
+    }
+
+    .profile.button{
+        background-color: #DDDDDD;
+    }
+
+    .profile.input:placeholder-shown{
+        font-style: italic;
+    }
+   
+
+    .profile.addItem-dropdown{
+        height:35px;
+        margin-top:10px;
+        font-family: quasimoda, sans-serif;
+        font-weight: 400;
+        font-style: italic; 
+        width:80%;
+        font-size: 16px; 
+        background-image: url("https://image.flaticon.com/icons/svg/318/318426.svg");
+        background-repeat: no-repeat;
+        background-position: calc(100% - 10px);
+        background-size: 10px;
+        border:1px solid black;
+        background-color: white;
+    }
+
+    .profile.addItem-name.input,
+    .profile.addItem-brand.input{
+        font-size: 16px; 
+        height:35px;
+    }
+
+    .profile.dropdown-container{
+        width:100%;
+    }
+
+    .profile.username{
+        position: relative;
+        color: black;
+        font-style: italic;
+        font-size: 18px;
+        margin:10px 0;
+    }
+
+    .profile.name{
+        position: relative;
+        color: black;
+        font-style: normal;
+        font-size: 16px;
+        margin:10px 0;
+    }
+
+    .profile.profilepic-div{
+        margin-top:20px;
+    }
+
+    .profile.outfit-list-container{
+    }
+
+    .profile.addOutfit-text{
+        font-size: 14px;
+        margin-bottom:5px;
+    }
+    
+    .profile.main-grid-item.addOutfit h1,
+    .profile.main-grid-item.addItem h1{
+        margin-top:30px;
+        font-size:22px;
+        margin-bottom:30px;
+    }
+
+    /* END OF PROFILES */
+    /*  */
 }

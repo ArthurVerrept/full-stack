@@ -32,7 +32,7 @@ router.get('/', ensureAuthenticated, (req, res) => {
     } else {
         bool = true;
     }
-    res.render('dashboard', {layout: 'main', name: req.user.name, signIn: bool, img: req.user.ImageURL})
+    res.render('dashboard', {layout: 'main', userName: req.user.userName, name:req.user.name, signIn: bool, img: req.user.ImageURL})
     //res.sendFile('/dashboard.html', {root: '/Users/mac/Desktop/Login/views'})
 });
 
@@ -143,6 +143,7 @@ router.post('/addOutfit', parser.any(), (req,res) => {
             Shoes: sendFit.Shoes,
             ImageURL: req.files[0].url
         });
+        console.log(newOutfit)
         newOutfit.save();
     })
     .then(() => {res.redirect('/dashboard')})

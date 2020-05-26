@@ -6,12 +6,16 @@
 
 <div class="profile main-grid-container">
     <div class="profile main-grid-item"></div>
-
     <div class="profile main-grid-item addItem">
-            <h2>Add Item</h2>
+        <h1>Create outfit & add Items</h1>
+        <div class="profile add-select">
+            <h2 class="profile addItem-title" onclick="showItem()">Add Item</h2> 
+            <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add Outfit</h2>
+        </div> 
             <form action="http://localhost:5000/dashboard/addItem" method="POST">
-                <p></p>
-                <select type="text" name="type" id="">
+                <p class="profile addItem-text">What type of clothing is it?</p>
+                <div class="profile dropdown-container">
+                <select class="profile addItem-dropdown input" type="text" name="type" id="">
                     <option value="Accessories">Accessories</option>
                     <option value="Hats">Hats</option>
                     <option value="Outerwear">Outerwear</option>
@@ -19,55 +23,63 @@
                     <option value="Bottoms">Bottoms</option>
                     <option value="FullBody">Full Body</option>
                     <option value="Shoes">Shoes</option>
-                </select required>
+                </select>
+                </div>
+                <p class="profile addItem-text">what brand is it?</p>
+                <input class="profile addItem-brand input" type="text" name="brand" placeholder="i.e. nike" id="" required>
 
-                <p>brand:</p>
-                <input type="text" name="brand" id="" required>
-
-                <p>item name:</p>
-                <input type="text" name="itemName" id=""required>
+                <p class="profile addItem-text">what's the name?</p>
+                <input class="profile addItem-name input" type="text" name="itemName" placeholder="i.e. airforce 1's " id=""required>
                 <br>
-                <input type="submit" value="add clothing item!" class="">
+                <input class="profile addItem-name button" type="submit" value="add clothing item!" class="">
             </form>
         </div>
 
-        <div class="profile main-grid-item addItem">
-    
-            <h2>add Outfit</h2>
+        <div class="profile main-grid-item addOutfit">
+        <h1>Create outfit & add Items</h1>
+         <div class="profile add-select">
+            <h2 class="profile addItem-title" onclick="showItem()">Add Item</h2> 
+            <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add Outfit</h2>
+        </div> 
             <form action="http://localhost:5000/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
-                <p>jpeg or png images only</p>
-                <input type="file" name="file" id="file" class="">
-                <p>Accessories:</p>
-                <select type="text" name="Accessories" id="accessorieSelect">
+                <p class="profile addOutfit-text">jpeg or png images only</p>
+                <div class="profile p-image-upload">
+                    <label for="file-input">
+                        <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590428149/clothing-users-app/Add_Photo_wip2xb.svg"/>
+                    </label>
+                    <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
+                </div>
+                <p class="profile addOutfit-text">Accessories:</p>
+                <select class="profile addItem-dropdown input" type="text" name="Accessories" id="accessorieSelect">
                     <option value="none">None</option>
                 </select>
-                <p>Hat:</p>
-                <select type="text" name="Hats" id="hatSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p>Outerwear:</p>
-                <select type="text" name="Outerwear" id="outerwearSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p>Top:</p>
-                <select type="text" name="Tops" id="topSelect">
+                <p class="profile addOutfit-text">Hat:</p>
+                <select class="profile addItem-dropdown input" type="text" name="Hats" id="hatSelect">
                     <option value="none">None</option>
                 </select>
 
-                <p>Bottom:</p>
-                <select type="text" name="Bottoms" id="bottomSelect">
+                <p class="profile addOutfit-text">Outerwear:</p>
+                <select class="profile addItem-dropdown input" type="text" name="Outerwear" id="outerwearSelect">
                     <option value="none">None</option>
                 </select>
 
-                <p>Full Body:</p>
-                <select type="text" name="FullBody" id="fullbodySelect">
+                <p class="profile addOutfit-text">Top:</p>
+                <select class="profile addItem-dropdown input" type="text" name="Tops" id="topSelect">
                     <option value="none">None</option>
                 </select>
 
-                <p>Shoes:</p>
-                <select type="text" name="Shoes" id="shoeSelect">
+                <p class="profile addOutfit-text">Bottom:</p>
+                <select class="profile addItem-dropdown input" type="text" name="Bottoms" id="bottomSelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p class="profile addOutfit-text">Full Body:</p>
+                <select class="profile addItem-dropdown input" type="text" name="FullBody" id="fullbodySelect">
+                    <option value="none">None</option>
+                </select>
+
+                <p class="profile addOutfit-text">Shoes:</p>
+                <select class="profile addItem-dropdown input" type="text" name="Shoes" id="shoeSelect">
                     <option value="none">None</option>
                 </select>
 
@@ -76,23 +88,91 @@
     </div>
 
 
-
-
-    <div class="profile main-grid-item">
-        <p>Welcome {{name}}</p>
+    
+    {{!-- <p>Welcome {{name}}</p> --}}
+    <div class="profile main-grid-item profile-part">
+        <div class="profile info-container">
             <div class='profile profilepic-div'>
                 <img class='profile-profile-image' src='{{img}}' alt=''>
             </div>
-            <p class='profile username'>@{{name}}</p>
             <div class='profile post-amount'></div>
             <div class='profile item-amount'></div>
+        </div>
+        <p class='profile name'>{{name}}</p>
+        <p class='profile username'>@{{userName}}</p>
+        <div class="profile view-choice">
+            <p onclick="showProfileOutfits()">Outfits</p>
+            <p onclick="showWardrobeOutfits()">Wardrobe</p>
+        </div>
         <div id="outfitList" class="profile outfit-list-container"></div>
+        <div id="clothesList" class="row"></div>
     </div>
+
+    <div class="profile main-grid-item profile-part"></div>
+
 </div>
 
-<div id="clothesList" class="row"></div>
+
+
 <script>
 
+        showProfileOutfits();
+        
+        function showProfileOutfits(){
+             document.querySelector('#clothesList').style.display = 'none';
+             document.querySelector('.profile.outfit-list-container').style.display = 'grid';
+        }
+
+        function showWardrobeOutfits(){
+            document.querySelector('.profile.outfit-list-container').style.display = 'none';
+            document.querySelector('#clothesList').style.display = 'initial';
+        }
+
+
+
+
+    document.getElementById("file-input").onchange = function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.querySelector(".profileImgUpload").src = e.target.result;
+            document.querySelector(".profileImgUpload").style.height = "200px";
+            document.querySelector(".profileImgUpload").style.left = "0";
+        };
+        reader.readAsDataURL(this.files[0]);
+        var cropFile = this.files[0];
+    };
+
+    document.addEventListener('load', showItem());
+
+    function showItem(){       
+        document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'none';
+        document.querySelector('.profile.main-grid-item.addItem').style.display = 'initial';
+
+        for(i = 0; i < 2; i++){
+            document.querySelectorAll('.addItem-title')[i].style.transitionDuration = '0.4s';
+
+           // document.querySelectorAll('.addItem-title')[i].style.fontStyle = 'italic';
+            //document.querySelectorAll('.addOutfit-title')[i].style.fontStyle = 'normal';  
+            document.querySelectorAll('.addItem-title')[i].style.border = '2px solid black';
+            document.querySelectorAll('.addOutfit-title')[i].style.border = 'none';
+        }
+        
+    }
+
+    function showOutfit(){
+        document.querySelector('.profile.main-grid-item.addItem').style = 'display:none';
+        document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'initial';
+
+        for(i = 0; i < 2; i++){
+            document.querySelectorAll('.addOutfit-title')[i].style.transitionDuration = '0.4s';
+
+           // document.querySelectorAll('.addItem-title')[i].style.fontStyle = 'normal';
+           // document.querySelectorAll('.addOutfit-title')[i].style.fontStyle = 'italic';
+            document.querySelectorAll('.addItem-title')[i].style.border = 'none';
+            document.querySelectorAll('.addOutfit-title')[i].style.border = '2px solid black';
+        }
+    }
 
 const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
 //This Script makes a fetch (essential a GET Http) request to the server
@@ -101,7 +181,7 @@ const clothesList = document.getElementById('clothesList');
 fetch('http://localhost:5000/dashboard/getClothes')
     .then(res => res.json())
     .then((item) => {
-        clothesAmount.innerHTML = item.length
+        //clothesAmount.innerHTML = item.length
         //.map() is used to cycle through the array, and a template literal is used to return HTML for
         //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
         let dataFeed = item.map((item) => {
@@ -272,4 +352,5 @@ function outfitSelect(item){
         }
     }
 }
+
 </script>
