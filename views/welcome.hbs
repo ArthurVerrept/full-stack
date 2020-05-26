@@ -12,7 +12,7 @@
 
     //This Script makes a fetch (essential a GET Http) request to the server
 const outfitList = document.getElementById('outfitList');
-fetch('http://localhost:5000/dashboard/getAllOutfits')
+fetch('/dashboard/getAllOutfits')
     .then(res => res.json())
     .then((outfits) => {
         console.log(outfits)

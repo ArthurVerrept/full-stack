@@ -12,7 +12,7 @@
             <h2 class="profile addItem-title" onclick="showItem()">Add Item</h2> 
             <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add Outfit</h2>
         </div> 
-            <form action="http://localhost:5000/dashboard/addItem" method="POST">
+            <form action="/dashboard/addItem" method="POST">
                 <p class="profile addItem-text">What type of clothing is it?</p>
                 <div class="profile dropdown-container">
                 <select class="profile addItem-dropdown input" type="text" name="type" id="">
@@ -41,7 +41,7 @@
             <h2 class="profile addItem-title" onclick="showItem()">Add Item</h2> 
             <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add Outfit</h2>
         </div> 
-            <form action="http://localhost:5000/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
+            <form action="/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
                 <p class="profile addOutfit-text">jpeg or png images only</p>
                 <div class="profile p-image-upload">
                     <label for="file-input">
@@ -178,7 +178,7 @@ const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect'
 //This Script makes a fetch (essential a GET Http) request to the server
 const clothesAmount = document.getElementById('post-amount');
 const clothesList = document.getElementById('clothesList');
-fetch('http://localhost:5000/dashboard/getClothes')
+fetch('/dashboard/getClothes')
     .then(res => res.json())
     .then((item) => {
         //clothesAmount.innerHTML = item.length
@@ -210,7 +210,7 @@ fetch('http://localhost:5000/dashboard/getClothes')
 const itemAmount = document.getElementById('item-amount');
 //This Script makes a fetch (essential a GET Http) request to the server
 const outfitList = document.getElementById('outfitList');
-fetch('http://localhost:5000/dashboard/getOutfits')
+fetch('/dashboard/getOutfits')
     .then(res => res.json())
     .then((outfits) => {
         clothesNum = outfits.length;

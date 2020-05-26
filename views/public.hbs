@@ -69,7 +69,7 @@ var fitID = window.location.pathname.splice(posName, 4 + userName.length, '');
 const outfitPhoto = document.querySelector('.displayOutfit');
 const outfitItems = document.querySelector('.displayOutfitItems');
 const profilePic = document.querySelector('.profile-image');
-fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserInfo`)
+fetch(`/p/${userName}/${fitID}/getUserInfo`)
 .then(res => res.json())
 .then((outfits) => {
     //
@@ -123,7 +123,7 @@ document.querySelector('.public .wardrobe-button').style.fontStyle = 'normal';
 document.querySelector('.public .wardrobe-button').innerHTML = 'wardrobe';
 var postAmount = document.querySelector('.post-amount')
 var outfitDisplay = document.querySelector('.profile-outfits-container')
-fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserPics`)
+fetch(`/p/${userName}/${fitID}/getUserPics`)
 .then(res => res.json())
 .then((outfits) => {
     postsAmount = outfits.length;
@@ -177,7 +177,7 @@ document.querySelector('.public .outfits-button').innerHTML = 'outfits';
 document.querySelector('.public .wardrobe-button').style.fontStyle = 'italic';
 document.querySelector('.public .wardrobe-button').innerHTML = 'wardrobe.';
 var outfitDisplay = document.querySelector('.profile-items-container')
-fetch(`http://localhost:5000/p/${userName}/${fitID}/getUserItems`)
+fetch(`/p/${userName}/${fitID}/getUserItems`)
 .then(res => res.json())
 .then((items) => {
     console.log(items.length)
