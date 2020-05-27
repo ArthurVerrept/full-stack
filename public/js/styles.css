@@ -1054,7 +1054,6 @@ text-decoration: underline;
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 601px) and (max-width: 768px) {
-
     /* change amount of images in masonry */
     .welcome.grid-item{
         width:48%;
@@ -1085,7 +1084,6 @@ text-decoration: underline;
     }
 
     .is-active{
-        /* transform: translate(-7px, -3.5px) */
         border: lightcoral;
     }
 
@@ -1119,14 +1117,11 @@ text-decoration: underline;
         margin-top:30px;
         height:550px;
         display:none;
-        /* display: inline; */
     }
 
     .nav-li.right .nav-li{
-
         display: inline;
         text-align: center;
-        
     }
 
     .login-button,
