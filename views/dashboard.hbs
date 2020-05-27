@@ -209,7 +209,7 @@ function deleteOutfit(id){
         document.querySelector(`.profile.img-delete${id}`).innerHTML = 'Delete';
         document.querySelector(`.profile.img-delete-Cancel${id}`).style.display = 'initial';
     } else {
-        window.location.href = `/dashboard/delete/${id}`
+        window.location.href = `/dashboard/deleteOutfit/${id}`
     }
 }
 

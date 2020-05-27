@@ -163,10 +163,10 @@ router.get('/getAllOutfits', (req, res) => {
 });
 
 
-router.get('/delete/:id', (req, res) => {
+router.get('/deleteOutfit/:id', (req, res) => {
     var strName = url.parse(req.url).pathname
     var posName = strName.indexOf('/');
-    var ID = strName.splice(posName, 8, '');
+    var ID = strName.splice(posName, 14, '');
     // if user not signed in
     if(req.user){
         // find outfit to delete
@@ -179,7 +179,6 @@ router.get('/delete/:id', (req, res) => {
             } else {
                 //check if the outfit belongs to user signed in
                 if(req.user._id == outfit.userID){
-                    console.log('your account')
                     Outfit.deleteOne({_id:ID}, (err, outfit) => { 
                         res.redirect('/dashboard');
                     })
