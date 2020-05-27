@@ -15,6 +15,7 @@ h1{
 
 input, select, button{
     cursor: pointer;
+    
 }
 
 
@@ -27,16 +28,19 @@ h2{
 a{
     color:black;
     text-decoration: none;
+    -webkit-appearance: none;
 }
 
 p, button{
     font-family: quasimoda, sans-serif;
     font-weight: 400;
     font-style: normal;
+    -webkit-appearance: none;
 }
 
 button:focus{
     outline: none;
+    -webkit-appearance: none;
 }
 
 /* NAV */
@@ -530,7 +534,7 @@ text-decoration: underline;
     margin-top:10px;
     margin-left:80px;
     display:none;
-    
+
     border:none;
     background-color: white;
 }
