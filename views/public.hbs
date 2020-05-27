@@ -94,11 +94,13 @@ fetch(`/p/${userName}/${fitID}/getUserInfo`)
             `
         } else if (keys[i] != 'profileURL' && keys[i] != 'values') {
             dataFeed += `
+            <a href="https://www.google.com/search?btnG=1&pws=0&q=${vals[i].brand} ${vals[i].itemName}" target="_blank">
             <div class=public-item>
                 <p class="public-itemS top type">${vals[i].type}: </p>
                 <p class="public-itemS top">${vals[i].brand} </p>
                 <p class="public-itemS bot">${vals[i].itemName} </p>
             </div>
+            </a>
             `
         }
     }
@@ -184,6 +186,7 @@ fetch(`/p/${userName}/${fitID}/getUserItems`)
     //var posts = outfits.length;
     let dataFeed = items.map((items) => {
         return `
+        <a href="https://www.google.com/search?btnG=1&pws=0&q=${items.brand} ${items.itemName}" target="_blank">
         <div class="profile-grid-item-clothing">
             <p class="type"> ${items.type} </p>
             <p> ${items.brand}: ${items.itemName} </p>

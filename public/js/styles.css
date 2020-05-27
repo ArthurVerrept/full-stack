@@ -265,6 +265,7 @@ text-decoration: underline;
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+    height: 100vh;
 }
 
 .public.displayOutfitItems{
@@ -279,6 +280,7 @@ text-decoration: underline;
     border-top:2px solid black;
     margin-bottom:30px;
     margin-right:10%;
+    background-color:white;
 }
 
 .public-itemS{ 
@@ -357,6 +359,38 @@ text-decoration: underline;
 .publicOutfitImages{
     width:100%;
     margin-left:5px;
+}
+
+.profile.clothing-item{
+    background-color: white;
+    padding:10px;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
+
+.profile.pt.p-type{
+    font-style:italic;
+    color:#707070;
+}
+
+.profile.wardrobe-item{
+    background-color: white;
+    padding:10px;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    margin-bottom:20px;
+}
+
+.profile-grid-item-clothing:hover,
+.public-item:hover,
+.profile.clothing-item:hover,
+.profile.wardrobe-item:hover{
+    transition-duration: 0.2s;
+    transform: scale(1.03)
+}
+
+.profile.wardrobe-item p{
+    margin:0;
 }
 
 .profile-outfits-container{
@@ -443,11 +477,13 @@ text-decoration: underline;
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+    height: 100vh;
 }
 .profile.add-select{
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     grid-template-columns: 40.25% 40.25% 19.5%;
+    margin-bottom:50px;
 }
 
 .profile.addOutfit-title,
@@ -472,9 +508,11 @@ text-decoration: underline;
     background-color:#DDDDDD;
     width:80%; 
     text-align: center;
+    border:none;
     height:42px;
     border-radius: 5px;
     box-sizing: border-box;
+    font-family: quasimoda;
 }
 
 .profile.main-grid-item.right{
@@ -501,7 +539,7 @@ text-decoration: underline;
 }
 
 .profileImgUpload{
-    height:24px;
+    height:45px;
     position: relative;
 }
 
@@ -782,6 +820,7 @@ text-decoration: underline;
         display: initial;
         grid-template-columns: repeat(4, 1fr); 
         grid-template-columns: 0.5fr 1.5fr 1.5fr 0.5fr;
+        
     }
 
     .public.chosen-fit{

@@ -31,18 +31,17 @@
                 <p class="profile addItem-text">what's the name?</p>
                 <input class="profile addItem-name input" type="text" name="itemName" placeholder=" i.e. airforce 1's " id=""required>
                 <br>
-                <input class="profile submit item" type="submit" value="add clothing item!" class="">
+                <input class="profile submit item" type="submit" value="Add Item" class="">
             </form>
 
             <div class="profile main-grid-item addOutfit">
-                <h1>Create outfit & add Items</h1>
                     <form action="/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
-                        <p class="profile addOutfit-text">jpeg or png images only</p>
                         <div class="profile p-image-upload">
                             <label for="file-input">
                                 <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590428149/clothing-users-app/Add_Photo_wip2xb.svg"/>
                             </label>
                             <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
+                            <p style="color: red;" class="profile addOutfit-text"> <i>jpeg</i> or <i>png</i> images only!</p>
                         </div>
                         <p class="profile addOutfit-text">Accessories:</p>
                         <select class="profile addItem-dropdown input" type="text" name="Accessories" id="accessorieSelect">
@@ -183,12 +182,13 @@ fetch('/dashboard/getClothes')
         let dataFeed = item.map((item) => {
             return `
             <br>
-            <div>
-                <p>${item.type}</p>
-                <p>${item.brand}</p>
-                <p>${item.itemName}</p>
+            <a href="https://www.google.com/search?btnG=1&pws=0&q=${item.brand} ${item.itemName}" target="_blank">
+            <div class="profile wardrobe-item">
+                <p class="profile pt p-type">${item.type}</p>
+                <p class="profile pt p-brand">${item.brand}</p>
+                <p class="profile pt p-name">${item.itemName}</p>
             </div>
-            <hr>
+            </a>
         `
         }).join('');
         //console.log(dataFeed)
@@ -249,65 +249,79 @@ fetch('/dashboard/getOutfits')
             currSend += `<div class="profile item-container">`;
             if(outfit[0].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[0].brand} ${outfit[0].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p> ${outfit[0].type}</p>
-                    <p> make: ${outfit[0].brand}</p>
-                    <p> item: ${outfit[0].itemName}</p>
+                    <p class="profile pt p-type"> ${outfit[0].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[0].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[0].itemName}</p>
                 </div>
+                </a>
                 `
             }
             if(outfit[1].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[1].brand} ${outfit[1].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p> ${outfit[1].type}</p>
-                    <p> make: ${outfit[1].brand}</p>
-                    <p> item: ${outfit[1].itemName}</p>
+                    <p class="profile pt p-type"> ${outfit[1].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[1].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[1].itemName}</p>
                 </div>
+                </a>
                 ` 
             }
             if(outfit[2].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[2].brand} ${outfit[2].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p>  ${outfit[2].type}</p>
-                    <p> make: ${outfit[2].brand}</p>
-                    <p> item: ${outfit[2].itemName}</p>
+                    <p class="profile pt p-type">  ${outfit[2].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[2].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[2].itemName}</p>
                 </div>
+                </a>
                 ` 
             }
             if(outfit[3].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[3].brand} ${outfit[3].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p>  ${outfit[3].type}</p>
-                    <p> make: ${outfit[3].brand}</p>
-                    <p> item: ${outfit[3].itemName}</p>
+                    <p class="profile pt p-type">  ${outfit[3].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[3].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[3].itemName}</p>
                 </div>
+                </a>
                 ` 
             }
             if(outfit[4].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[4].brand} ${outfit[4].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p>  ${outfit[4].type}</p>
-                    <p> make: ${outfit[4].brand}</p>
-                    <p> item: ${outfit[4].itemName}</p>
+                    <p class="profile pt p-type">  ${outfit[4].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[4].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[4].itemName}</p>
                 </div>
+                </a>
                 ` 
             }
             if(outfit[5].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[5].brand} ${outfit[5].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p>  ${outfit[5].type}</p>
-                    <p> make: ${outfit[5].brand}</p>
-                    <p> item: ${outfit[5].itemName}</p>
+                    <p class="profile pt p-type">  ${outfit[5].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[5].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[5].itemName}</p>
                 </div>
+                </a>
                 ` 
             }
             if(outfit[6].itemName != 'none'){
                 currSend += `
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[6].brand} ${outfit[6].itemName}" target="_blank">
                 <div class="profile clothing-item">
-                    <p>  ${outfit[6].type}</p>
-                    <p> make: ${outfit[6].brand}</p>
-                    <p> item: ${outfit[6].itemName}</p>
+                    <p class="profile pt p-type">  ${outfit[6].type}</p>
+                    <p class="profile pt p-brand"> ${outfit[6].brand}</p>
+                    <p class="profile pt p-name">  ${outfit[6].itemName}</p>
                 </div>
+                </a>
                 ` 
             }
             currSend += `</div>`;
