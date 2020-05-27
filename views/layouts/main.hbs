@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/js/styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/xly2clb.css">
     <script src="https://kit.fontawesome.com/0e3529bb94.js" crossorigin="anonymous"></script>
-    <title>handle my bars</title>
+
+    <link rel="shortcut icon" type="image/png" href="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590618091/clothing-users-app/Component_10_1_nm6mg5.png"/>
+    <title>fraiment</title>
     {{!-- <meta 
         name='viewport' 
         content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
@@ -21,19 +23,20 @@
         <div class="burger-line bot"></div>
     </div>
         <ul class="nav-ul">
-            <li class="nav-li">
+            <li class="nav-li logo">
                 <a class="logo-link" href="/"> <h1 class="logo">fraiment</h1></a>
+                <div class="fraiment-underline"></div>
             </li>
             <li class="nav-li right loggedIn">
                 <ul>
                     <li class="nav-li">
                         <div class="explore-link">
-                            <a href="/">explore</a>
+                            <a class="nav-explore" href="/">explore</a>
                         </div>
                     </li>
                     <li class="nav-li">
                         <div class="profile-link">
-                            <a href="/dashboard">profile</a>
+                            <a class="nav-profile" href="/dashboard">profile</a>
                         </div>
                     </li>
                     <li class="nav-li">
@@ -53,8 +56,9 @@
         <div class="burger-line bot"></div>
     </div>
         <ul class="nav-ul">
-            <li class="nav-li">
+            <li class="nav-li logo">
                 <a class="logo-link" href="/"> <h1 class="logo">fraiment</h1></a>
+                <div class="fraiment-underline"></div>
             </li>
             <li class="nav-li right">
                 <ul>
@@ -94,6 +98,14 @@
 
 </body>
     <script>
+        document.querySelector('.nav-li.logo').addEventListener('mouseover', function(){
+            document.querySelector('.fraiment-underline').style.width = '92px';
+        });
+
+        document.querySelector('.nav-li.logo').addEventListener('mouseout', function(){
+            document.querySelector('.fraiment-underline').style.width = '0px';
+        });
+
         if(document.querySelector('.login-error p') != null){
             setTimeout(function(){document.querySelector('.login-error p').style.display = 'none'}, 2500)
         }       

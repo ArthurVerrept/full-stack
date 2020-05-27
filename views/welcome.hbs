@@ -1,13 +1,22 @@
 
 
 <div class="welcome grid">
+        <div class="stamp stamp1"><p>explore</p></div>
         <div id="outfitList">
+
 
         </div>
     </div>
 <script src="/js/masonry.pkgd.min.js "></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script>
+
+if(!document.querySelector('.nav-profile')){
+
+} else {
+    document.querySelector('.nav-profile').innerHTML = 'profile'
+    document.querySelector('.nav-explore').innerHTML = 'explore.'
+}
 
 
 
@@ -45,7 +54,8 @@ fetch('/dashboard/getAllOutfits')
             // init Isotope after all images have loaded
             msnry = new Masonry( grid, {
                 itemSelector: '.grid-item',
-                gutter:10,
+                stamp: '.stamp',
+                gutter:10
             });
         });
     })

@@ -9,8 +9,8 @@
     <div class="profile main-grid-item addItem">
         <h1>Create outfit & add Items</h1>
         <div class="profile add-select">
-            <h2 class="profile addItem-title" onclick="showItem()">Add Item</h2> 
-            <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add Outfit</h2>
+            <h2 class="profile addItem-title" onclick="showItem()">add item</h2> 
+            <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add outfit</h2>
         </div> 
             <form action="/dashboard/addItem" method="POST">
                 <p class="profile addItem-text">What type of clothing is it?</p>
@@ -106,13 +106,17 @@
     </div>
 
     <div class="profile main-grid-item profile-part"></div>
-
 </div>
-
 
 
 <script>
 
+    if(!document.querySelector('.nav-profile')){
+
+    } else {
+        document.querySelector('.nav-profile').innerHTML = 'profile.'
+        document.querySelector('.nav-explore').innerHTML = 'explore'
+    }
 
         showProfileOutfits();
         
@@ -182,11 +186,12 @@ fetch('/dashboard/getClothes')
         let dataFeed = item.map((item) => {
             return `
             <br>
-            <a href="https://www.google.com/search?btnG=1&pws=0&q=${item.brand} ${item.itemName}" target="_blank">
+            <a href="https://www.google.com/search?btnG=1&pws=0&q=${item.brand} ${item.itemName} ${item.type}" target="_blank">
             <div class="profile wardrobe-item">
                 <p class="profile pt p-type">${item.type}</p>
                 <p class="profile pt p-brand">${item.brand}</p>
                 <p class="profile pt p-name">${item.itemName}</p>
+                <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
             </div>
             </a>
         `
@@ -249,77 +254,84 @@ fetch('/dashboard/getOutfits')
             currSend += `<div class="profile item-container">`;
             if(outfit[0].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[0].brand} ${outfit[0].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[0].brand} ${outfit[0].itemName} ${outfit[0].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type"> ${outfit[0].type}</p>
                     <p class="profile pt p-brand"> ${outfit[0].brand}</p>
                     <p class="profile pt p-name">  ${outfit[0].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 `
             }
             if(outfit[1].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[1].brand} ${outfit[1].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[1].brand} ${outfit[1].itemName} ${outfit[1].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type"> ${outfit[1].type}</p>
                     <p class="profile pt p-brand"> ${outfit[1].brand}</p>
                     <p class="profile pt p-name">  ${outfit[1].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 ` 
             }
             if(outfit[2].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[2].brand} ${outfit[2].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[2].brand} ${outfit[2].itemName} ${outfit[2].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type">  ${outfit[2].type}</p>
                     <p class="profile pt p-brand"> ${outfit[2].brand}</p>
                     <p class="profile pt p-name">  ${outfit[2].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 ` 
             }
             if(outfit[3].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[3].brand} ${outfit[3].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[3].brand} ${outfit[3].itemName} ${outfit[3].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type">  ${outfit[3].type}</p>
                     <p class="profile pt p-brand"> ${outfit[3].brand}</p>
                     <p class="profile pt p-name">  ${outfit[3].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 ` 
             }
             if(outfit[4].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[4].brand} ${outfit[4].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[4].brand} ${outfit[4].itemName} ${outfit[4].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type">  ${outfit[4].type}</p>
                     <p class="profile pt p-brand"> ${outfit[4].brand}</p>
                     <p class="profile pt p-name">  ${outfit[4].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 ` 
             }
             if(outfit[5].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[5].brand} ${outfit[5].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[5].brand} ${outfit[5].itemName} ${outfit[5].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type">  ${outfit[5].type}</p>
                     <p class="profile pt p-brand"> ${outfit[5].brand}</p>
                     <p class="profile pt p-name">  ${outfit[5].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 ` 
             }
             if(outfit[6].itemName != 'none'){
                 currSend += `
-                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[6].brand} ${outfit[6].itemName}" target="_blank">
+                <a href="https://www.google.com/search?btnG=1&pws=0&q=${outfit[6].brand} ${outfit[6].itemName} ${outfit[6].type}" target="_blank">
                 <div class="profile clothing-item">
                     <p class="profile pt p-type">  ${outfit[6].type}</p>
                     <p class="profile pt p-brand"> ${outfit[6].brand}</p>
                     <p class="profile pt p-name">  ${outfit[6].itemName}</p>
+                    <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
                 </div>
                 </a>
                 ` 

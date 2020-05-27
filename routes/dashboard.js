@@ -113,7 +113,6 @@ router.post('/addOutfit', parser.any(), (req,res) => {
     // get values from fit object
     var fitVals = Object.values(fit)
     var fitKeys = Object.keys(fit)
-
     // find all items from name and only from currently logged in user
     Item.find({userID: req.user._id, itemName: fitVals})
     .then((docs)=> {
@@ -147,7 +146,6 @@ router.post('/addOutfit', parser.any(), (req,res) => {
             Shoes: sendFit.Shoes,
             ImageURL: req.files[0].url
         });
-        console.log(newOutfit)
         newOutfit.save();
     })
     .then(() => {res.redirect('/dashboard')})

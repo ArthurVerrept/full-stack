@@ -15,13 +15,13 @@
                 <div class='public profilepic-div'>
                     <img class='public profile-image' src='' alt=''>
                 </div>
-                <p class='public username'>@{{user}}</p>
             </div>
             <div class='public post-amount'>
             </div> 
             <div class='public item-amount'>
             </div>
         </div>
+        <p class='public username'>@{{user}}</p>
 
         <div class="public profile-view-choice">
             <div class="public profile-view-select outfits-view">   
@@ -94,12 +94,14 @@ fetch(`/p/${userName}/${fitID}/getUserInfo`)
             `
         } else if (keys[i] != 'profileURL' && keys[i] != 'values') {
             dataFeed += `
-            <a href="https://www.google.com/search?btnG=1&pws=0&q=${vals[i].brand} ${vals[i].itemName}" target="_blank">
+            <a href="https://www.google.com/search?btnG=1&pws=0&q=${vals[i].brand} ${vals[i].itemName} ${vals[i].type}" target="_blank">
             <div class=public-item>
                 <p class="public-itemS top type">${vals[i].type}: </p>
                 <p class="public-itemS top">${vals[i].brand} </p>
                 <p class="public-itemS bot">${vals[i].itemName} </p>
+                <img class="search-icon" src="https://image.flaticon.com/icons/svg/598/598494.svg">
             </div>
+
             </a>
             `
         }
@@ -186,11 +188,13 @@ fetch(`/p/${userName}/${fitID}/getUserItems`)
     //var posts = outfits.length;
     let dataFeed = items.map((items) => {
         return `
-        <a href="https://www.google.com/search?btnG=1&pws=0&q=${items.brand} ${items.itemName}" target="_blank">
+        <a href="https://www.google.com/search?btnG=1&pws=0&q=${items.brand} ${items.itemName} ${items.type}" target="_blank">
         <div class="profile-grid-item-clothing">
             <p class="type"> ${items.type} </p>
             <p> ${items.brand}: ${items.itemName} </p>
+            <img class="search-icon" src="https://image.flaticon.com/icons/svg/598/598494.svg">
         </div>
+        </a>
     `
     }).join('');
     //console.log(dataFeed)

@@ -7,6 +7,34 @@ body {
     margin: 0;
 }
 
+.fraiment-underline{
+    width: 0px;
+    height: 3px;
+    border-radius: 10px;
+    background-color: black;
+    margin-left:6px;
+    margin-top:2px;
+    opacity: 1;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+}
+
+.stamp p{
+    font-family: quasimoda, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size:44px;
+    margin:30px 0 10px 0;
+    text-align:center;
+}
+
+.stamp1 {
+left: 30%;
+top: 10px;
+width: 20%;
+height: 100px;
+}
+
 h1{
     font-family: quasimoda, sans-serif;
     font-weight: 600;
@@ -92,10 +120,6 @@ button:focus{
     border:none;
 }
 
-.loggedIn{
-    margin-top:3px;
-}
-
 .login-field{
     font-family: quasimoda, sans-serif;
     font-weight: 400;
@@ -132,8 +156,9 @@ button:focus{
     font-family: quasimoda, sans-serif;
     font-weight: 400;
     font-style: italic;
+    margin-top:-2px;
     margin-right:100px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .profile-link:hover,
@@ -159,8 +184,6 @@ text-decoration: underline;
 /* END NAV */
 /*  */
 
-
-
 /*  */
 /* REGISTER PAGE */
 
@@ -170,6 +193,13 @@ text-decoration: underline;
 
 .welcome.grid-item{
     width:31.5%;
+    margin-bottom:5px;
+}
+
+.profile-grid-item:hover,
+.welcome.grid-item:hover{
+    transition-duration: 0.2s;
+    transform: scale(1.02);
 }
 
 .welcomeOutfitImages{
@@ -276,15 +306,31 @@ text-decoration: underline;
 }
 
 .public-item{
+    position:relative;
     border-left:2px solid black; 
     border-top:2px solid black;
     margin-bottom:30px;
     margin-right:10%;
     background-color:white;
+    /* background-image: url('https://image.flaticon.com/icons/svg/598/598494.svg');
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: right; */
+}
+
+.public-item p{
+    padding-right:40px;
+}
+
+.search-icon{
+    position:absolute;
+    width: 20px;
+    top:50%;
+    right:20px;
+    float:top;
 }
 
 .public-itemS{ 
-    background:white;
     margin:0;
     padding-left:20px;
 }
@@ -327,7 +373,9 @@ text-decoration: underline;
     font-size: 22px;
     margin:0;
     margin-top:20px;
-    margin-bottom:30px;
+}
+.public.username{
+    margin-left:20px;
 }
 
 
@@ -346,7 +394,7 @@ text-decoration: underline;
 .public.user{
     display:grid;
     grid-template-columns: repeat(5, 1fr); 
-    grid-template-columns: 1fr 0.5fr 0.5fr 2fr;
+    grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr;
     margin:20px;
 }
 
@@ -362,10 +410,15 @@ text-decoration: underline;
 }
 
 .profile.clothing-item{
+    position: relative;
     background-color: white;
     padding:10px;
     border-top: 2px solid black;
     border-left: 2px solid black;
+}
+
+.profile.clothing-item p{
+    padding-right:40px;
 }
 
 .profile.pt.p-type{
@@ -374,11 +427,16 @@ text-decoration: underline;
 }
 
 .profile.wardrobe-item{
+    position: relative;
     background-color: white;
     padding:10px;
     border-bottom: 2px solid black;
     border-right: 2px solid black;
     margin-bottom:20px;
+}
+
+.profile.wardrobe-item p{
+    padding-right:40px;
 }
 
 .profile-grid-item-clothing:hover,
@@ -387,6 +445,11 @@ text-decoration: underline;
 .profile.wardrobe-item:hover{
     transition-duration: 0.2s;
     transform: scale(1.03)
+}
+
+.search-icon:hover{
+    transition-duration: 0.4s;
+    transform:rotate(360deg) scale(1.3);
 }
 
 .profile.wardrobe-item p{
@@ -409,7 +472,7 @@ text-decoration: underline;
 
 .item-amount,
 .post-amount{
-    margin-top:40px;
+    margin-top:20px;
 }
 
 
@@ -447,6 +510,7 @@ text-decoration: underline;
 }
 
 .profile-grid-item-clothing{
+    position: relative;
     margin-top:40px;
     margin-bottom:40px;
     padding:20px;
@@ -457,6 +521,10 @@ text-decoration: underline;
 .profile-grid-item-clothing .type{
     color: #606060;
     font-style: italic;
+}
+
+.profile-grid-item-clothing p{
+    padding-right:40px;
 }
 
 .public.profile-view-select{
@@ -476,7 +544,7 @@ text-decoration: underline;
 .profile.main-grid-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
-    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+    grid-template-columns: 0.3fr 1.2fr 1.2fr 0.3fr;
     height: 100vh;
 }
 .profile.add-select{
@@ -603,10 +671,6 @@ text-decoration: underline;
     grid-template-columns: 1fr 1fr;
 }
 
-.profile.img-container{
-
-}
-
 .profile.img-container img{
     width: 95%;
 }
@@ -634,10 +698,10 @@ text-decoration: underline;
 
 
 .profile.main-grid-item.profile-part{
+    padding-bottom:30px;
     padding-left:20px;
     background-color: antiquewhite;
 }
-
 
 .profile.view-choice{
     display:grid;
@@ -648,6 +712,93 @@ text-decoration: underline;
 .profile.view-choice p{
     text-align:center;
     margin-bottom:0;
+}
+
+    
+.profile.addItem-text{
+    font-size: 14px;
+    margin-bottom:5px;
+}
+
+.profile.input{
+    border:1px solid black;
+    margin-bottom: 30px;
+    height:25px;
+    border-radius:4px;
+    width:80%;
+    
+}
+
+.profile.button{
+    background-color: #DDDDDD;
+}
+
+.profile.input:placeholder-shown{
+    font-style: italic;
+}
+
+
+.profile.addItem-dropdown{
+    height:35px;
+    margin-top:10px;
+    font-family: quasimoda, sans-serif;
+    font-weight: 400;
+    font-style: italic; 
+    width:80.5%;
+    font-size: 16px; 
+    background-image: url("https://image.flaticon.com/icons/svg/318/318426.svg");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px);
+    background-size: 10px;
+    border:1px solid black;
+    background-color: white;
+    -webkit-appearance:none;
+    padding-left:10px;
+}
+
+.profile.addItem-name.input,
+.profile.addItem-brand.input{
+    font-size: 16px; 
+    height:35px;
+}
+
+.profile.dropdown-container{
+    width:100%;
+}
+
+.profile.username{
+    position: relative;
+    color: black;
+    font-style: italic;
+    font-size: 18px;
+    margin:10px 0;
+}
+
+.profile.name{
+    position: relative;
+    color: black;
+    font-style: normal;
+    font-size: 16px;
+    margin:10px 0;
+}
+
+.profile.profilepic-div{
+    margin-top:20px;
+}
+
+.profile.outfit-list-container{
+}
+
+.profile.addOutfit-text{
+    font-size: 14px;
+    margin-bottom:5px;
+}
+
+.profile.main-grid-item.addOutfit h1,
+.profile.main-grid-item.addItem h1{
+    margin-top:30px;
+    font-size:22px;
+    margin-bottom:30px;
 }
 
 /* USER PROFILE END */
@@ -1089,10 +1240,16 @@ text-decoration: underline;
         padding-top:10px;
     }
 
+    .public.user{
+        grid-template-columns: 2fr 1fr 1fr ;
+    }
+
     /* END OF PUBLIC */
     /*  */
 
-
+    .profile.main-grid-container{
+        display:initial;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1110,10 +1267,6 @@ text-decoration: underline;
         transition-duration:0.5s ;
         margin-right:0px !important;
         display:block !important;
-    }
-
-    .explore-link{
-        margin-right: 30px;
     }
 
     .nav-container{
@@ -1152,6 +1305,49 @@ text-decoration: underline;
 
     .public-itemS.top{
         padding-top:10px;
+    }
+
+    .public.user{
+        grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr;
+    }
+
+
+    .profile.addOutfit-title,
+    .profile.addItem-title{
+        font-size: 20px;
+    }
+
+    .profile.main-grid-container{
+        grid-template-columns:0.1fr 0.8fr 1.2fr 0.1fr;
+    }
+
+    .profile.img-container img{
+        width:130%;
+    }
+
+    .profile.profilepic-div{
+        width:90px;
+        height:90px;
+    }
+
+    .profile-profile-image {
+        height:100px;
+    }
+
+    .profile.delete{
+        height:40px;
+    }
+
+    .profile.delete-cancel{
+        height:40px;
+    }
+
+    .profile.clothing-item p{
+        font-size:16px;
+    }
+
+    .profile.item-container {
+        margin-top:25px;
     }
 }
 
@@ -1192,92 +1388,7 @@ text-decoration: underline;
         grid-template-columns: repeat(5, 1fr);
         grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
     }
-    
-    .profile.addItem-text{
-        font-size: 14px;
-        margin-bottom:5px;
-    }
 
-    .profile.input{
-        border:1px solid black;
-        margin-bottom: 30px;
-        height:25px;
-        border-radius:4px;
-        width:80%;
-        
-    }
-
-    .profile.button{
-        background-color: #DDDDDD;
-    }
-
-    .profile.input:placeholder-shown{
-        font-style: italic;
-    }
-   
-
-    .profile.addItem-dropdown{
-        height:35px;
-        margin-top:10px;
-        font-family: quasimoda, sans-serif;
-        font-weight: 400;
-        font-style: italic; 
-        width:80.5%;
-        font-size: 16px; 
-        background-image: url("https://image.flaticon.com/icons/svg/318/318426.svg");
-        background-repeat: no-repeat;
-        background-position: calc(100% - 10px);
-        background-size: 10px;
-        border:1px solid black;
-        background-color: white;
-        -webkit-appearance:none;
-        padding-left:10px;
-    }
-
-    .profile.addItem-name.input,
-    .profile.addItem-brand.input{
-        font-size: 16px; 
-        height:35px;
-    }
-
-    .profile.dropdown-container{
-        width:100%;
-    }
-
-    .profile.username{
-        position: relative;
-        color: black;
-        font-style: italic;
-        font-size: 18px;
-        margin:10px 0;
-    }
-
-    .profile.name{
-        position: relative;
-        color: black;
-        font-style: normal;
-        font-size: 16px;
-        margin:10px 0;
-    }
-
-    .profile.profilepic-div{
-        margin-top:20px;
-    }
-
-    .profile.outfit-list-container{
-    }
-
-    .profile.addOutfit-text{
-        font-size: 14px;
-        margin-bottom:5px;
-    }
-    
-    .profile.main-grid-item.addOutfit h1,
-    .profile.main-grid-item.addItem h1{
-        margin-top:30px;
-        font-size:22px;
-        margin-bottom:30px;
-    }
 
     /* END OF PROFILES */
     /*  */
