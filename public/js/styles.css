@@ -447,7 +447,7 @@ text-decoration: underline;
 .profile.add-select{
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    grid-template-columns: 0.9fr 0.9fr 20%;
+    grid-template-columns: 40.25% 40.25% 19.5%;
 }
 
 .profile.addOutfit-title,
@@ -457,6 +457,20 @@ text-decoration: underline;
     cursor: pointer;
     background-color:#DDDDDD;
     width:95%; 
+    text-align: center;
+    height:42px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin:auto;
+}
+
+.profile.submit.item,
+.profile.submit.outfit{
+    font-size: 24px;
+    text-decoration-color: black !important;
+    cursor: pointer;
+    background-color:#DDDDDD;
+    width:80%; 
     text-align: center;
     height:42px;
     border-radius: 5px;
@@ -1169,7 +1183,7 @@ text-decoration: underline;
         font-family: quasimoda, sans-serif;
         font-weight: 400;
         font-style: italic; 
-        width:80%;
+        width:80.5%;
         font-size: 16px; 
         background-image: url("https://image.flaticon.com/icons/svg/318/318426.svg");
         background-repeat: no-repeat;
@@ -1185,7 +1199,6 @@ text-decoration: underline;
     .profile.addItem-brand.input{
         font-size: 16px; 
         height:35px;
-        padding-left:10px;
     }
 
     .profile.dropdown-container{
