@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
+var url = require('url');
 
 const config = require('../config/config');
 
@@ -62,10 +63,10 @@ var JSONsend = [];
                 var tempArray = [];
                 // look through every item id to match to item of clothing
                 for (let y = 0; y < outfitKeys[0].length; y++) {
-                    if(outfitKeys[x][y] == '_id' || outfitKeys[x][y] == 'userID' || outfitKeys[x][y] == '__v' || outfitKeys[x][y] == 'date'){
+                    if(outfitKeys[x][y] == 'userID' || outfitKeys[x][y] == '__v' || outfitKeys[x][y] == 'date'){
                         //console.log('not one we want')
                     }
-                    else if(outfitKeys[x][y] == 'ImageURL') {
+                    else if(outfitKeys[x][y] === 'ImageURL') {
                         tempArray.push({URL: outfitIDs[x][y]});
                     }
                     else if(outfitIDs[x][y] == 'none') {
@@ -78,6 +79,9 @@ var JSONsend = [];
                            }
                         } 
                     }
+                }
+                if(outfitKeys[x][0] == '_id') {
+                    tempArray.push({ID: outfitIDs[x][0]});
                 }
                 JSONsend[x] = tempArray
             }
@@ -156,6 +160,42 @@ router.get('/getAllOutfits', (req, res) => {
         res.send(allOutfits)
     })
     .catch(err=>console.log(err))
+});
+
+
+router.get('/delete/:id', (req, res) => {
+    var strName = url.parse(req.url).pathname
+    var posName = strName.indexOf('/');
+    var ID = strName.splice(posName, 8, '');
+    // if user not signed in
+    if(req.user){
+        // find outfit to delete
+        Outfit.findOne({_id:ID}, (err, outfit) => { 
+            // if no outfit
+            if(outfit == undefined || outfit == null){
+                // redirect to dashboard
+                res.redirect('/dashboard');
+            // if there is an outfit
+            } else {
+                //check if the outfit belongs to user signed in
+                if(req.user._id == outfit.userID){
+                    console.log('your account')
+                    Outfit.deleteOne({_id:ID}, (err, outfit) => { 
+                        res.redirect('/dashboard');
+                    })
+                    .catch(err=>console.log(err))
+                // if not belonging to signed in user account redirect
+                } else {
+                    res.redirect('/dashboard');
+                }
+            }
+        });
+    // if user no signed in redirect
+    } else{
+        res.redirect('/')
+    }
+
+
 });
 
 module.exports = router;

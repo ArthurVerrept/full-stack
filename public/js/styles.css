@@ -29,10 +29,14 @@ a{
     text-decoration: none;
 }
 
-p{
+p, button{
     font-family: quasimoda, sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+button:focus{
+    outline: none;
 }
 
 /* NAV */
@@ -502,6 +506,34 @@ text-decoration: underline;
     width:100%;
 }
 
+.profile.delete{
+    position:absolute;
+    font-size:16px;
+    height:24px;
+    background:#D3163A;
+    margin-top:10px;
+    margin-left:10px;
+    border:none;
+    z-index: 1;
+    font-style: italic;
+    color: white;
+}
+
+
+.profile.delete-cancel{
+    font-style: italic;
+    font-size:16px;
+    height:24px;
+    position:absolute;
+    z-index: 1;
+    margin:0;
+    margin-top:10px;
+    margin-left:80px;
+    display:none;
+    border:none;
+    background-color: white;
+}
+
 .profile.clothing-item p{
     margin:0;
 }
@@ -577,7 +609,7 @@ text-decoration: underline;
         position: absolute;
         right:20px;
         top:7px;
-        z-index: 2;
+        z-index: 3;
         display:inline !important;
     }
 
@@ -623,7 +655,7 @@ text-decoration: underline;
         position: -webkit-sticky;
         position: sticky;
         top:0;
-        z-index: 1;
+        z-index: 2;
     }
 
     .nav-li.right{
@@ -822,7 +854,7 @@ text-decoration: underline;
         position: absolute;
         right:20px;
         top:7px;
-        z-index: 2;
+        z-index: 3;
         display:inline !important;
     }
 
@@ -868,7 +900,7 @@ text-decoration: underline;
         position: -webkit-sticky;
         position: sticky;
         top:0;
-        z-index: 1;
+        z-index: 2;
     }
 
     .nav-li.right{
@@ -1030,7 +1062,7 @@ text-decoration: underline;
         position: -webkit-sticky;
         position: sticky;
         top:0;
-        z-index: 1;
+        z-index: 2;
     }
 
     .public.grid-container{
@@ -1071,7 +1103,7 @@ text-decoration: underline;
         position: -webkit-sticky;
         position: sticky;
         top:0;
-        z-index: 1;
+        z-index: 2;
     }
     
 
@@ -1138,12 +1170,15 @@ text-decoration: underline;
         background-size: 10px;
         border:1px solid black;
         background-color: white;
+        -webkit-appearance:none;
+        padding-left:10px;
     }
 
     .profile.addItem-name.input,
     .profile.addItem-brand.input{
         font-size: 16px; 
         height:35px;
+        padding-left:10px;
     }
 
     .profile.dropdown-container{

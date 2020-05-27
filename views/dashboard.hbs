@@ -33,59 +33,57 @@
                 <br>
                 <input class="profile addItem-name button" type="submit" value="add clothing item!" class="">
             </form>
+
+            <div class="profile main-grid-item addOutfit">
+                <h1>Create outfit & add Items</h1>
+                    <form action="/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
+                        <p class="profile addOutfit-text">jpeg or png images only</p>
+                        <div class="profile p-image-upload">
+                            <label for="file-input">
+                                <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590428149/clothing-users-app/Add_Photo_wip2xb.svg"/>
+                            </label>
+                            <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
+                        </div>
+                        <p class="profile addOutfit-text">Accessories:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="Accessories" id="accessorieSelect">
+                            <option value="none">None</option>
+                        </select>
+                        <p class="profile addOutfit-text">Hat:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="Hats" id="hatSelect">
+                            <option value="none">None</option>
+                        </select>
+
+                        <p class="profile addOutfit-text">Outerwear:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="Outerwear" id="outerwearSelect">
+                            <option value="none">None</option>
+                        </select>
+
+                        <p class="profile addOutfit-text">Top:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="Tops" id="topSelect">
+                            <option value="none">None</option>
+                        </select>
+
+                        <p class="profile addOutfit-text">Bottom:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="Bottoms" id="bottomSelect">
+                            <option value="none">None</option>
+                        </select>
+
+                        <p class="profile addOutfit-text">Full Body:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="FullBody" id="fullbodySelect">
+                            <option value="none">None</option>
+                        </select>
+
+                        <p class="profile addOutfit-text">Shoes:</p>
+                        <select class="profile addItem-dropdown input" type="text" name="Shoes" id="shoeSelect">
+                            <option value="none">None</option>
+                        </select>
+
+                        <input type="submit" value="Make Outfit" class="">
+                    </form>
+            </div>
         </div>
 
-        <div class="profile main-grid-item addOutfit">
-        <h1>Create outfit & add Items</h1>
-         <div class="profile add-select">
-            <h2 class="profile addItem-title" onclick="showItem()">Add Item</h2> 
-            <h2 class="profile addOutfit-title" style="text-decoration-color:black;" onclick="showOutfit()">add Outfit</h2>
-        </div> 
-            <form action="/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
-                <p class="profile addOutfit-text">jpeg or png images only</p>
-                <div class="profile p-image-upload">
-                    <label for="file-input">
-                        <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590428149/clothing-users-app/Add_Photo_wip2xb.svg"/>
-                    </label>
-                    <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
-                </div>
-                <p class="profile addOutfit-text">Accessories:</p>
-                <select class="profile addItem-dropdown input" type="text" name="Accessories" id="accessorieSelect">
-                    <option value="none">None</option>
-                </select>
-                <p class="profile addOutfit-text">Hat:</p>
-                <select class="profile addItem-dropdown input" type="text" name="Hats" id="hatSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p class="profile addOutfit-text">Outerwear:</p>
-                <select class="profile addItem-dropdown input" type="text" name="Outerwear" id="outerwearSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p class="profile addOutfit-text">Top:</p>
-                <select class="profile addItem-dropdown input" type="text" name="Tops" id="topSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p class="profile addOutfit-text">Bottom:</p>
-                <select class="profile addItem-dropdown input" type="text" name="Bottoms" id="bottomSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p class="profile addOutfit-text">Full Body:</p>
-                <select class="profile addItem-dropdown input" type="text" name="FullBody" id="fullbodySelect">
-                    <option value="none">None</option>
-                </select>
-
-                <p class="profile addOutfit-text">Shoes:</p>
-                <select class="profile addItem-dropdown input" type="text" name="Shoes" id="shoeSelect">
-                    <option value="none">None</option>
-                </select>
-
-                <input type="submit" value="Make Outfit" class="">
-            </form>
-    </div>
+        
 
 
     
@@ -101,8 +99,8 @@
         <p class='profile name'>{{name}}</p>
         <p class='profile username'>@{{userName}}</p>
         <div class="profile view-choice">
-            <p onclick="showProfileOutfits()">Outfits</p>
-            <p onclick="showWardrobeOutfits()">Wardrobe</p>
+            <p class="profile showUserItems" onclick="showProfileOutfits()">Outfits</p>
+            <p class="profile showUserOutfits" onclick="showWardrobeOutfits()">Wardrobe</p>
         </div>
         <div id="outfitList" class="profile outfit-list-container"></div>
         <div id="clothesList" class="row"></div>
@@ -116,14 +114,23 @@
 
 <script>
 
+
         showProfileOutfits();
         
         function showProfileOutfits(){
-             document.querySelector('#clothesList').style.display = 'none';
-             document.querySelector('.profile.outfit-list-container').style.display = 'grid';
+            document.querySelector('.profile.showUserOutfits').innerHTML = 'Wardrobe';
+            document.querySelector('.profile.showUserItems').innerHTML = 'Outfits.';
+            document.querySelector('#clothesList').style.display = 'none';
+            document.querySelector('.profile.outfit-list-container').style.display = 'grid';
+            document.querySelector('.profile.showUserOutfits').style.fontStyle = 'normal'; 
+            document.querySelector('.profile.showUserItems').style.fontStyle = 'italic'; 
         }
 
         function showWardrobeOutfits(){
+            document.querySelector('.profile.showUserOutfits').innerHTML = 'Wardrobe.';
+            document.querySelector('.profile.showUserItems').innerHTML = 'Outfits';
+            document.querySelector('.profile.showUserOutfits').style.fontStyle = 'italic'; 
+            document.querySelector('.profile.showUserItems').style.fontStyle = 'normal'; 
             document.querySelector('.profile.outfit-list-container').style.display = 'none';
             document.querySelector('#clothesList').style.display = 'initial';
         }
@@ -145,33 +152,22 @@
 
     document.addEventListener('load', showItem());
 
-    function showItem(){       
+    function showItem(){   
         document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'none';
-        document.querySelector('.profile.main-grid-item.addItem').style.display = 'initial';
+        document.querySelector('.profile.main-grid-item.addItem form').style.display = 'initial';
 
-        for(i = 0; i < 2; i++){
-            document.querySelectorAll('.addItem-title')[i].style.transitionDuration = '0.4s';
-
-           // document.querySelectorAll('.addItem-title')[i].style.fontStyle = 'italic';
-            //document.querySelectorAll('.addOutfit-title')[i].style.fontStyle = 'normal';  
-            document.querySelectorAll('.addItem-title')[i].style.border = '2px solid black';
-            document.querySelectorAll('.addOutfit-title')[i].style.border = 'none';
-        }
-        
+        document.querySelector('.addItem-title').style.transitionDuration = '0.4s';
+        document.querySelector('.addItem-title').style.border = '2px solid black';
+        document.querySelector('.addOutfit-title').style.border = 'none';    
     }
 
     function showOutfit(){
-        document.querySelector('.profile.main-grid-item.addItem').style = 'display:none';
+        document.querySelector('.profile.main-grid-item.addItem form').style = 'display:none';
         document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'initial';
 
-        for(i = 0; i < 2; i++){
-            document.querySelectorAll('.addOutfit-title')[i].style.transitionDuration = '0.4s';
-
-           // document.querySelectorAll('.addItem-title')[i].style.fontStyle = 'normal';
-           // document.querySelectorAll('.addOutfit-title')[i].style.fontStyle = 'italic';
-            document.querySelectorAll('.addItem-title')[i].style.border = 'none';
-            document.querySelectorAll('.addOutfit-title')[i].style.border = '2px solid black';
-        }
+            document.querySelector('.addOutfit-title').style.transitionDuration = '0.4s';
+            document.querySelector('.addItem-title').style.border = 'none';
+            document.querySelector('.addOutfit-title').style.border = '2px solid black';
     }
 
 const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
@@ -207,18 +203,42 @@ fetch('/dashboard/getClothes')
 // 
 // 
 
+function deleteOutfit(id){
+    if(document.querySelector(`.profile.img-delete${id}`).innerHTML == 'X'){
+        //console.log(id)
+        document.querySelector(`.profile.img-delete${id}`).innerHTML = 'Delete';
+        document.querySelector(`.profile.img-delete-Cancel${id}`).style.display = 'initial';
+    } else {
+        window.location.href = `/dashboard/delete/${id}`
+    }
+}
+
+
+function deleteOutfitCancel(id){
+    //if(document.querySelector(`.profile.img-delete${id}`).innerHTML == 'X'){
+        //console.log(id)
+        document.querySelector(`.profile.img-delete${id}`).innerHTML = 'X';
+        document.querySelector(`.profile.img-delete-Cancel${id}`).style.display = 'none';
+    //} else {
+        //window.location.href = `/delete/${id}`
+    //}
+}
+
 const itemAmount = document.getElementById('item-amount');
 //This Script makes a fetch (essential a GET Http) request to the server
 const outfitList = document.getElementById('outfitList');
 fetch('/dashboard/getOutfits')
     .then(res => res.json())
     .then((outfits) => {
+        var i = 0;
         clothesNum = outfits.length;
         var dataFeed;
         dataFeed = outfits.map((outfit) => {
             var currSend = ``;
             if(outfit[7].URL != 'none'){
                 currSend += `<div class="profile img-container">`;
+                currSend += `<button onclick='deleteOutfit("${outfit[8].ID}")' class="profile img-delete${outfit[8].ID} delete">X</button>`;
+                currSend += `<button onclick='deleteOutfitCancel("${outfit[8].ID}")' style="display:none" class="profile img-delete-Cancel${outfit[8].ID} delete-cancel">Cancel</button>`;
                 currSend += `
                 <div class="profile clothing-item-img">
                     <img src="${outfit[7].URL}"> 
@@ -292,6 +312,7 @@ fetch('/dashboard/getOutfits')
             }
             currSend += `</div>`;
             return currSend;
+            i++;
         }).join('');
         outfitList.innerHTML = dataFeed;
     })
