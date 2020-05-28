@@ -38,7 +38,7 @@
                     <form action="/dashboard/addOutfit" method="POST" enctype="multipart/form-data">
                         <div class="profile p-image-upload">
                             <label for="file-input">
-                                <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590428149/clothing-users-app/Add_Photo_wip2xb.svg"/>
+                                <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590661483/clothing-users-app/Web_1920_1_qltmar.png"/>
                             </label>
                             <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
                             <p style="color: red;" class="profile addOutfit-text red"> <i>jpeg</i> or <i>png</i> images only!</p>
@@ -174,13 +174,11 @@
 
 const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
 //This Script makes a fetch (essential a GET Http) request to the server
-const clothesAmount = document.getElementById('post-amount');
 const clothesList = document.getElementById('clothesList');
 fetch('/dashboard/getClothes')
     .then(res => res.json())
     .then((item) => {
         document.querySelector('.profile.item-amount p.amount').innerHTML = item.length;
-        //clothesAmount.innerHTML = item.length
         //.map() is used to cycle through the array, and a template literal is used to return HTML for
         //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
         let dataFeed = item.map((item) => {
@@ -229,7 +227,6 @@ function deleteOutfitCancel(id){
     //}
 }
 
-const itemAmount = document.getElementById('item-amount');
 //This Script makes a fetch (essential a GET Http) request to the server
 const outfitList = document.getElementById('outfitList');
 fetch('/dashboard/getOutfits')
