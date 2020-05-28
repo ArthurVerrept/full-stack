@@ -366,6 +366,7 @@ text-decoration: underline;
 .public.grid-item.right{
     padding-top:25px;
     background-color:antiquewhite;
+    padding-bottom:30px;
 }
 
 .public.username{
