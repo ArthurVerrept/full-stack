@@ -6,6 +6,7 @@ const Item = require('../models/Clothes.js');
 const { ensureAuthenticated } = require('../config/auth')
 var url = require('url');
 
+// math function to find positions in string
 String.prototype.splice = function(idx, rem, str) {
     return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
 };
@@ -54,23 +55,20 @@ router.get('/p/:userName/:_id' , (req, res) => {
     }).then((user) => {
         // if there is that user in db from url
         if(!user[0]){
-
-            // INSERT ERROR PAGE HERE
-            //console.log('user doesnt exists')
-
+            res.redirect('/')
         } else{
-            //console.log('user exists')
+            // if id is wrong length
             if(ID.length != 24){
-
-                // INSERT ERROR PAGE HERE
-                //console.log('wrong length babay lol')
+                res.redirect('/')
             }
+            // if id is correct length
             else{
                 Outfit.find({_id: ID}, (err, outfitDocs) => { 
                 }).then((fit)=>{
+                    // if nothing found
                     if(!fit[0]){
-                        // INSERT ERROR PAGE HERE
-                        //console.log('no fit lol')
+                        res.redirect('/')
+                    // if all correct render users page with signin boolean
                     } else {
                         res.render('public', {layout:'main', user: name, signIn: bool})
                     }
@@ -103,6 +101,7 @@ User.find({userName: userName}, (err, user) => {})
         Outfit.findOne({_id: ID}, (err, user) => {})
         .then((outfit) => {
             fit = {};
+            // get ID's and Values
             var keys = Object.keys(outfit._doc);
             var values = Object.values(outfit._doc);
             // for every item in the outfit

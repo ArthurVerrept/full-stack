@@ -36,18 +36,18 @@
         </div>
         </form>
     </div>
-  <script src="https://unpkg.com/cropperjs"></script>
-    <script src="https://unpkg.com/dropzone"></script>
-    <script>
-        document.getElementById("file-input").onchange = function () {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                document.querySelector(".registerImgUpload").src = e.target.result;
-                document.querySelector(".registerImgUpload").style.height = "200px";
-                document.querySelector(".registerImgUpload").style.left = "0";
-            };
-            reader.readAsDataURL(this.files[0]);
-            var cropFile = this.files[0];
+<script src="https://unpkg.com/cropperjs"></script>
+<script src="https://unpkg.com/dropzone"></script>
+<script>
+    document.getElementById("file-input").onchange = function () {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // get loaded data and render thumbnail.
+            document.querySelector(".registerImgUpload").src = e.target.result;
+            document.querySelector(".registerImgUpload").style.height = "200px";
+            document.querySelector(".registerImgUpload").style.left = "0";
         };
-    </script>
+        reader.readAsDataURL(this.files[0]);
+        var cropFile = this.files[0];
+    };
+</script>

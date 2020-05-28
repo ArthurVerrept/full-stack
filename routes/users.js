@@ -8,6 +8,7 @@ const cloudinaryStorage = require("multer-storage-cloudinary");
 
 const config = require('../config/config');
 
+// connects to my cloudinary cloud storage
 cloudinary.config({
     cloud_name: config.CLOUD_NAME,
     api_key: config.API_KEY,
@@ -18,6 +19,7 @@ cloudinary.config({
     folder: "clothing-users-app",
     allowedFormats: ["jpg", "png"]
   });
+// creates instance of multer to send file to cloudinary
 const parser = multer({ storage: storage });
 
 // user model
@@ -38,6 +40,7 @@ router.post('/register', parser.any(), (req, res) =>{
         errors.push({ msg: 'Please fill in all fields' })
     }
 
+    // check for spaces
     if(userName.includes(' ') == true){
         errors.push({ msg: 'Username cannot contain spaces' })
     }
@@ -108,7 +111,7 @@ router.post('/login', (req, res, next) =>{
     }
 });
 
-// logout handle
+// handle logout
 router.get('/logout', (req,res) => {
     req.logout();
     req.flash('success_msg', 'you are logged out');

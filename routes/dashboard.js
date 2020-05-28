@@ -7,6 +7,7 @@ var url = require('url');
 
 const config = require('../config/config');
 
+// connects to my cloudinary cloud storage
 cloudinary.config({
     cloud_name: config.CLOUD_NAME,
     api_key: config.API_KEY,
@@ -17,6 +18,7 @@ cloudinary.config({
     folder: "clothing-users-app",
     allowedFormats: ["jpg", "png"]
   });
+// creates instance of multer to send file to cloudinary
 const parser = multer({ storage: storage });
 
 const { ensureAuthenticated } = require('../config/auth')
@@ -27,14 +29,15 @@ const Outfit = require('../models/Outfit.js');
 
 // render dashboard view and using second parameter ensureauthenticated to make sure user is loggin in or not
 router.get('/', ensureAuthenticated, (req, res) => {
-    // else render page as usual
+    // if user isnt signed in
     if(req.user == undefined){
         var bool = false;
+    // if user is is signed in
     } else {
         bool = true;
     }
+    // render dashboard sending username name and image url for profile image
     res.render('dashboard', {layout: 'main', userName: req.user.userName, name:req.user.name, signIn: bool, img: req.user.ImageURL})
-    //res.sendFile('/dashboard.html', {root: '/Users/mac/Desktop/Login/views'})
 });
 
 
@@ -53,6 +56,7 @@ var JSONsend = [];
     Item.find({userID: req.user._id}, (err, docs) => {
     }).then((itemDocs) => { 
         Outfit.find({userID: req.user._id}, (err, outfitDocs) => { 
+            // put id's and values into seperate arrays
             for (let i = 0; i < outfitDocs.length; i++) {
                 outfitIDs.push(Object.values(outfitDocs[i]._doc)) 
                 outfitKeys.push(Object.keys(outfitDocs[i]._doc)) 
@@ -64,8 +68,9 @@ var JSONsend = [];
                 // look through every item id to match to item of clothing
                 for (let y = 0; y < outfitKeys[0].length; y++) {
                     if(outfitKeys[x][y] == 'userID' || outfitKeys[x][y] == '__v' || outfitKeys[x][y] == 'date'){
-                        //console.log('not one we want')
+                        // no need for these things
                     }
+                    // else add to temparray
                     else if(outfitKeys[x][y] === 'ImageURL') {
                         tempArray.push({URL: outfitIDs[x][y]});
                     }
@@ -80,11 +85,14 @@ var JSONsend = [];
                         } 
                     }
                 }
+                // add id of outfit to be added to delete
                 if(outfitKeys[x][0] == '_id') {
                     tempArray.push({ID: outfitIDs[x][0]});
                 }
+                // save array within array in position x 
                 JSONsend[x] = tempArray
             }
+            // send array of arrays
             res.send(JSONsend)
         })
         .catch(err=>console.log(err))
@@ -92,8 +100,10 @@ var JSONsend = [];
 })
 
 router.post('/addItem', (req,res) => {
+    // get data from front end into an object
     const {type, brand, itemName} =  req.body;
 
+    // add userID from user signed in
     const newItem = new Item({
         userID: req.user._id,
         type,
@@ -101,11 +111,14 @@ router.post('/addItem', (req,res) => {
         itemName,
     });
 
+    // save to db
     newItem.save();
 
+    // confirmation message and redirect
     req.flash('success_msg', 'Item Added!')
     res.redirect('/dashboard')
 });
+
 
 router.post('/addOutfit', parser.any(), (req,res) => {
     const sendFit = { }
@@ -134,6 +147,7 @@ router.post('/addOutfit', parser.any(), (req,res) => {
             }
         }
 
+        // create object to send
         const newOutfit = new Outfit({
             userID: req.user._id,
             userName: req.user.userName,
@@ -146,9 +160,11 @@ router.post('/addOutfit', parser.any(), (req,res) => {
             Shoes: sendFit.Shoes,
             ImageURL: req.files[0].url
         });
+        //save to db
         newOutfit.save();
     })
     .then(() => {
+        // confirmation message and redirect
         req.flash('success_msg', 'Outfit Added!')
         res.redirect('/dashboard')
     })

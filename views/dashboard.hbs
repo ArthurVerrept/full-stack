@@ -111,100 +111,94 @@
 
 <script>
 
-    if(!document.querySelector('.nav-profile')){
-    } else {
-        document.querySelector('.nav-profile').innerHTML = 'profile.'
-        document.querySelector('.nav-explore').innerHTML = 'explore'
-    }
-
-        showProfileOutfits();
-        
-        function showProfileOutfits(){
-            document.querySelector('.profile.showUserOutfits').innerHTML = 'Wardrobe';
-            document.querySelector('.profile.showUserItems').innerHTML = 'Outfits.';
-            document.querySelector('#clothesList').style.display = 'none';
-            document.querySelector('.profile.outfit-list-container').style.display = 'grid';
-            document.querySelector('.profile.showUserOutfits').style.fontStyle = 'normal'; 
-            document.querySelector('.profile.showUserItems').style.fontStyle = 'italic'; 
-        }
-
-        function showWardrobeOutfits(){
-            document.querySelector('.profile.showUserOutfits').innerHTML = 'Wardrobe.';
-            document.querySelector('.profile.showUserItems').innerHTML = 'Outfits';
-            document.querySelector('.profile.showUserOutfits').style.fontStyle = 'italic'; 
-            document.querySelector('.profile.showUserItems').style.fontStyle = 'normal'; 
-            document.querySelector('.profile.outfit-list-container').style.display = 'none';
-            document.querySelector('#clothesList').style.display = 'initial';
-        }
+//  change which link has full stop for navigation
+if(!document.querySelector('.nav-profile')){
+} else {
+    document.querySelector('.nav-profile').innerHTML = 'profile.'
+    document.querySelector('.nav-explore').innerHTML = 'explore'
+}
 
 
+showProfileOutfits();
 
+function showProfileOutfits(){
+    document.querySelector('.profile.showUserOutfits').innerHTML = 'Wardrobe';
+    document.querySelector('.profile.showUserItems').innerHTML = 'Outfits.';
+    document.querySelector('#clothesList').style.display = 'none';
+    document.querySelector('.profile.outfit-list-container').style.display = 'grid';
+    document.querySelector('.profile.showUserOutfits').style.fontStyle = 'normal'; 
+    document.querySelector('.profile.showUserItems').style.fontStyle = 'italic'; 
+}
 
-    document.getElementById("file-input").onchange = function () {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            // get loaded data and render thumbnail.
-            document.querySelector(".profileImgUpload").src = e.target.result;
-            document.querySelector(".profileImgUpload").style.height = "200px";
-            document.querySelector(".profileImgUpload").style.left = "0";
-        };
-        reader.readAsDataURL(this.files[0]);
-        var cropFile = this.files[0];
+function showWardrobeOutfits(){
+    document.querySelector('.profile.showUserOutfits').innerHTML = 'Wardrobe.';
+    document.querySelector('.profile.showUserItems').innerHTML = 'Outfits';
+    document.querySelector('.profile.showUserOutfits').style.fontStyle = 'italic'; 
+    document.querySelector('.profile.showUserItems').style.fontStyle = 'normal'; 
+    document.querySelector('.profile.outfit-list-container').style.display = 'none';
+    document.querySelector('#clothesList').style.display = 'initial';
+}
+
+document.getElementById("file-input").onchange = function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.querySelector(".profileImgUpload").src = e.target.result;
+        document.querySelector(".profileImgUpload").style.height = "200px";
+        document.querySelector(".profileImgUpload").style.left = "0";
     };
+    reader.readAsDataURL(this.files[0]);
+    var cropFile = this.files[0];
+};
 
-    document.addEventListener('load', showItem());
+document.addEventListener('load', showItem());
 
-    function showItem(){   
-        document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'none';
-        document.querySelector('.profile.main-grid-item.addItem form').style.display = 'initial';
+function showItem(){   
+    document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'none';
+    document.querySelector('.profile.main-grid-item.addItem form').style.display = 'initial';
 
-        document.querySelector('.addItem-title').style.transitionDuration = '0.4s';
-        document.querySelector('.addItem-title').style.border = '2px solid black';
-        document.querySelector('.addOutfit-title').style.border = 'none';    
-    }
+    document.querySelector('.addItem-title').style.transitionDuration = '0.4s';
+    document.querySelector('.addItem-title').style.border = '2px solid black';
+    document.querySelector('.addOutfit-title').style.border = 'none';    
+}
 
-    function showOutfit(){
-        document.querySelector('.profile.main-grid-item.addItem form').style = 'display:none';
-        document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'initial';
+function showOutfit(){
+    document.querySelector('.profile.main-grid-item.addItem form').style = 'display:none';
+    document.querySelector('.profile.main-grid-item.addOutfit').style.display = 'initial';
 
-            document.querySelector('.addOutfit-title').style.transitionDuration = '0.4s';
-            document.querySelector('.addItem-title').style.border = 'none';
-            document.querySelector('.addOutfit-title').style.border = '2px solid black';
-    }
+        document.querySelector('.addOutfit-title').style.transitionDuration = '0.4s';
+        document.querySelector('.addItem-title').style.border = 'none';
+        document.querySelector('.addOutfit-title').style.border = '2px solid black';
+}
 
 const idNames = ['accessorieSelect', 'hatSelect', 'outerwearSelect', 'topSelect', 'bottomSelect', 'fullbodySelect', 'shoeSelect'];
 //This Script makes a fetch (essential a GET Http) request to the server
 const clothesList = document.getElementById('clothesList');
 fetch('/dashboard/getClothes')
-    .then(res => res.json())
-    .then((item) => {
-        document.querySelector('.profile.item-amount p.amount').innerHTML = item.length;
-        //.map() is used to cycle through the array, and a template literal is used to return HTML for
-        //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
-        let dataFeed = item.map((item) => {
-            return `
-            <br>
-            <a href="https://www.google.com/search?btnG=1&pws=0&q=${item.brand} ${item.itemName} ${item.type}" target="_blank">
-            <div class="profile wardrobe-item">
-                <p class="profile pt p-type">${item.type}</p>
-                <p class="profile pt p-brand">${item.brand}</p>
-                <p class="profile pt p-name">${item.itemName}</p>
-                <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
-            </div>
-            </a>
-        `
-        }).join('');
-        //console.log(dataFeed)
-        clothesList.innerHTML = dataFeed;
-        outfitSelect(item);
-    })
-    .catch(err => { throw err });
+.then(res => res.json())
+.then((item) => {
+    document.querySelector('.profile.item-amount p.amount').innerHTML = item.length;
+    //.map() is used to cycle through the array, and a template literal is used to return HTML for
+    //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
+    let dataFeed = item.map((item) => {
+        return `
+        <br>
+        <a href="https://www.google.com/search?btnG=1&pws=0&q=${item.brand} ${item.itemName} ${item.type}" target="_blank">
+        <div class="profile wardrobe-item">
+            <p class="profile pt p-type">${item.type}</p>
+            <p class="profile pt p-brand">${item.brand}</p>
+            <p class="profile pt p-name">${item.itemName}</p>
+            <img class="search-icon" style="top:40%" src="https://image.flaticon.com/icons/svg/598/598494.svg">
+        </div>
+        </a>
+    `
+    }).join('');
+    //console.log(dataFeed)
+    clothesList.innerHTML = dataFeed;
+    outfitSelect(item);
+})
+.catch(err => { throw err });
 
-
-
-//  
-// 
-// 
 
 function deleteOutfit(id){
     if(document.querySelector(`.profile.img-delete${id}`).innerHTML == 'X'){
@@ -218,13 +212,8 @@ function deleteOutfit(id){
 
 
 function deleteOutfitCancel(id){
-    //if(document.querySelector(`.profile.img-delete${id}`).innerHTML == 'X'){
-        //console.log(id)
-        document.querySelector(`.profile.img-delete${id}`).innerHTML = 'X';
-        document.querySelector(`.profile.img-delete-Cancel${id}`).style.display = 'none';
-    //} else {
-        //window.location.href = `/delete/${id}`
-    //}
+    document.querySelector(`.profile.img-delete${id}`).innerHTML = 'X';
+    document.querySelector(`.profile.img-delete-Cancel${id}`).style.display = 'none';
 }
 
 //This Script makes a fetch (essential a GET Http) request to the server

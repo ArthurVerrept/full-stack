@@ -23,10 +23,12 @@ module.exports = function(passport){
                     // once comparison is done callback function with err and doesMatch boolean starts
                     bcrypt.compare(password, user.password, (err, doesMatch) =>{
                         if(err) throw err;
-
+                        // if user passwords match
                         if(doesMatch){
+                            // return done with user
                             return done(null, user);
                         } else {
+                            // else return message to be use in front end with handlebars
                             return done(null, false, { message: 'password is incorrect' });
                         }
                     })
@@ -35,10 +37,12 @@ module.exports = function(passport){
         })
     )
 
+    // passport serialize user
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
       
+    // deserialize user to get body info
     passport.deserializeUser((id, done) => {
         User.findById(id, (err, user) => {
             done(err, user);
