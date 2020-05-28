@@ -148,7 +148,10 @@ router.post('/addOutfit', parser.any(), (req,res) => {
         });
         newOutfit.save();
     })
-    .then(() => {res.redirect('/dashboard')})
+    .then(() => {
+        req.flash('success_msg', 'Outfit Added!')
+        res.redirect('/dashboard')
+    })
     .catch(err=>console.log(err));
 });
 

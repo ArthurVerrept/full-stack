@@ -1,9 +1,4 @@
 
-
-{{#if success_msg}}
-    <p>{{ success_msg }}</p>
-{{/if}}
-
 <div class="profile main-grid-container">
     <div class="profile main-grid-item"></div>
     <div class="profile main-grid-item addItem">
@@ -32,6 +27,11 @@
                 <input class="profile addItem-name input" type="text" name="itemName" placeholder=" i.e. airforce 1's " id=""required>
                 <br>
                 <input class="profile submit item" type="submit" value="Add Item" class="">
+
+                {{#if success_msg}}
+                    <p>{{ success_msg }}</p>
+                {{/if}}
+
             </form>
 
             <div class="profile main-grid-item addOutfit">
