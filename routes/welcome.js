@@ -13,10 +13,6 @@ String.prototype.splice = function(idx, rem, str) {
 // render main page
 router.get('/', (req, res) => {
     // checking through deserializeUser if user exists
-    // if(req.user != 'undefined' && req.user != null){
-    //     // if user exists redirect to dashboard
-    //     res.redirect('/dashboard');
-    // } else {
         // else render page as usual
         if(req.user == undefined){
             var bool = false;
@@ -24,7 +20,6 @@ router.get('/', (req, res) => {
             bool = true;
         }
         res.render('welcome', {layout: 'main', signIn: bool})
-    // }
 })
 
 router.get('/p/:userName/:_id' , (req, res) => {
