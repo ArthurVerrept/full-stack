@@ -801,6 +801,29 @@ text-decoration: underline;
     margin-bottom:30px;
 }
 
+.profile.info-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.profile.info-container p{
+    
+    margin: 5px;
+    font-size: 24px;
+    font-style: italic;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+.profile.item-amount,
+.profile.post-amount{
+    margin-top:50px;
+}
+
+.profile.info-container p.posts{
+    margin: 8px;
+    font-size: 16px;
+}
 /* USER PROFILE END */
 /*  */
 
@@ -917,7 +940,7 @@ text-decoration: underline;
     }
 
     .logout-form{
-        margin-top:200px;
+        margin-top:100px;
         margin-bottom:70px;
     }
 
@@ -1045,6 +1068,163 @@ text-decoration: underline;
     }
     /* END OF PUBLIC */
     /*  */
+
+    /*  */
+    /* START OF PROFILE */
+
+    .profile.main-grid-container{
+        display:initial;
+    }
+    
+    .profile.main-grid-item.addOutfit h1, 
+    .profile.main-grid-item.addItem h1{
+        text-align:center;
+    }
+
+    .profile.add-select{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .profile.addOutfit-title, 
+    .profile.addItem-title{
+        height:50px;
+    }
+
+    .profile.addOutfit-title, 
+    .profile.addItem-title{
+        padding-top:4px;
+    }
+
+    .profile.addOutfit-text.red{
+        margin-bottom:40px;
+    }    
+
+    .profile.addOutfit-text,
+    .profile.addItem-text{
+        text-align: center;
+    }
+
+    .profile.profile.dropdown-container{
+        width:80.5%;
+        margin: 0 auto;
+    }
+
+
+    .profile.addItem-dropdown{
+        width:100%;
+        height:45px;
+    }
+    
+    .profile.addItem-dropdown.outfit{
+        width:80%;
+        margin-left:10%;
+    }
+
+    .profile.addItem-name.input, 
+    .profile.addItem-brand.input{
+        text-align: center;
+        margin-left:10%;
+        width:79.5%;
+    }
+
+    .profile.submit.item{
+        margin-left: 10%;
+        width:80.3%;
+        height:50px;
+        margin-top:30px;
+    }
+
+    .profile.p-image-upload{
+    }
+
+    .profileImgUpload{
+        width:80vw;
+        height:100% !important;
+        margin-left:10%;
+    }
+
+    .profile.submit.outfit{
+        margin-left:10%;
+        height:50px;
+        margin-top:30px;
+    }
+
+    .profile.input{
+        margin-bottom:20px;
+    }
+
+    .profile.main-grid-item.profile-part{
+        padding-top:10px;
+        margin-top:40px;
+        padding-left:10px;
+        padding-right:10px;
+        padding-bottom:60px;
+    }
+
+    .profile.delete-cancel,
+    .profile.delete{
+        height:40px;
+    }
+
+    .profile.rightright{
+        display: none;
+    }
+
+    .profile.img-container img {
+        width:130%;
+    }
+    
+    .profile.delete-cancel{
+        margin-top:5px;
+        margin-left:75px;
+    }
+
+    .profile.delete{
+        margin-left:5px;
+        margin-top:5px;
+    }
+
+    .profile.pt{
+        font-size:14px;
+        padding-right:25px !important;
+    }
+
+    .search-icon{
+        width:15px;
+        right:10px;
+    }
+
+    .profile.profilepic-div{
+        width: 90px;
+        height: 90px;
+    }
+    .profile.profilepic-div img{
+        height:105px;
+    }
+
+    .profile.info-container{
+        grid-template-columns:0.5fr 0.5fr 0.5fr 0.5fr;
+    }
+
+    .profile.item-amount, 
+    .profile.post-amount{
+        margin-top:30px;
+    }
+
+    .profile.post-amount p, 
+    .profile.item-amount p{
+        font-size:20px;
+    }
+
+    .profile.post-amount p.posts, 
+    .profile.item-amount p.posts{
+        font-size:18px;
+        margin:4px;
+    }
+
+    /*  */
+    /* END OF PROFILE */
     
     /* change amount of images in masonry */
     .welcome.grid-item{
@@ -1242,9 +1422,120 @@ text-decoration: underline;
     /* END OF PUBLIC */
     /*  */
 
+    /*  */
+    /* START OF PROFILE */
+
     .profile.main-grid-container{
         display:initial;
     }
+    
+    .profile.main-grid-item.addOutfit h1, 
+    .profile.main-grid-item.addItem h1{
+        text-align:center;
+    }
+
+    .profile.add-select{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .profile.addOutfit-title, 
+    .profile.addItem-title{
+        height:50px;
+    }
+
+    .profile.addOutfit-title, 
+    .profile.addItem-title{
+        padding-top:4px;
+    }
+
+    .profile.addOutfit-text.red{
+        margin-bottom:40px;
+    }    
+
+    .profile.addOutfit-text,
+    .profile.addItem-text{
+        text-align: center;
+    }
+
+    .profile.profile.dropdown-container{
+        width:80.5%;
+        margin: 0 auto;
+    }
+
+
+    .profile.addItem-dropdown{
+        width:100%;
+        height:45px;
+    }
+    
+    .profile.addItem-dropdown.outfit{
+        width:80%;
+        margin-left:10%;
+    }
+
+    .profile.addItem-name.input, 
+    .profile.addItem-brand.input{
+        text-align: center;
+        margin-left:10%;
+        width:79.5%;
+    }
+
+    .profile.submit.item{
+        margin-left: 10%;
+        width:80.3%;
+        height:50px;
+        margin-top:30px;
+    }
+
+    .profile.p-image-upload{
+    }
+
+    .profileImgUpload{
+        width:40vw;
+        height:100% !important;
+
+        margin-left:30%;
+    }
+
+    .profile.submit.outfit{
+        margin-left:10%;
+        height:50px;
+        margin-top:30px;
+    }
+
+    .profile.input{
+        margin-bottom:20px;
+    }
+
+    .profile.main-grid-item.profile-part{
+        padding-top:10px;
+        margin-top:40px;
+        padding-left:10px;
+        padding-right:10px;
+        padding-bottom:60px;
+    }
+
+    .profile.delete-cancel,
+    .profile.delete{
+        height:40px;
+    }
+
+    .profile.rightright{
+        display: none;
+    }
+
+    .profile.info-container{
+        grid-template-columns:0.5fr 0.5fr 0.5fr 0.5fr;
+    }
+
+    .profile.item-amount, 
+    .profile.post-amount{
+        margin-top:40px;
+    }
+
+    /*  */
+    /* END OF PROFILE */
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1344,6 +1635,15 @@ text-decoration: underline;
     .profile.item-container {
         margin-top:25px;
     }
+
+    .profile.info-container{
+        grid-template-columns:0.5fr 0.5fr 0.5fr 0.5fr;
+    }
+
+    .profile.item-amount, 
+    .profile.post-amount{
+        margin-top:35px;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -1379,9 +1679,7 @@ text-decoration: underline;
     /* PROFILE */
 
     .profile.info-container{
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+        grid-template-columns: 1fr 0.5fr 0.5fr 0.5fr;;
     }
 
 

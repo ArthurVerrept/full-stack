@@ -41,39 +41,39 @@
                                 <img class="profileImgUpload" src="https://res.cloudinary.com/db8tnyh6d/image/upload/v1590428149/clothing-users-app/Add_Photo_wip2xb.svg"/>
                             </label>
                             <input id="file-input" name="file" type="file" onchange="readURL(this);"/>
-                            <p style="color: red;" class="profile addOutfit-text"> <i>jpeg</i> or <i>png</i> images only!</p>
+                            <p style="color: red;" class="profile addOutfit-text red"> <i>jpeg</i> or <i>png</i> images only!</p>
                         </div>
                         <p class="profile addOutfit-text">Accessories:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="Accessories" id="accessorieSelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="Accessories" id="accessorieSelect">
                             <option value="none">None</option>
                         </select>
                         <p class="profile addOutfit-text">Hat:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="Hats" id="hatSelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="Hats" id="hatSelect">
                             <option value="none">None</option>
                         </select>
 
                         <p class="profile addOutfit-text">Outerwear:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="Outerwear" id="outerwearSelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="Outerwear" id="outerwearSelect">
                             <option value="none">None</option>
                         </select>
 
                         <p class="profile addOutfit-text">Top:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="Tops" id="topSelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="Tops" id="topSelect">
                             <option value="none">None</option>
                         </select>
 
                         <p class="profile addOutfit-text">Bottom:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="Bottoms" id="bottomSelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="Bottoms" id="bottomSelect">
                             <option value="none">None</option>
                         </select>
 
                         <p class="profile addOutfit-text">Full Body:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="FullBody" id="fullbodySelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="FullBody" id="fullbodySelect">
                             <option value="none">None</option>
                         </select>
 
                         <p class="profile addOutfit-text">Shoes:</p>
-                        <select class="profile addItem-dropdown input" type="text" name="Shoes" id="shoeSelect">
+                        <select class="profile addItem-dropdown outfit input" type="text" name="Shoes" id="shoeSelect">
                             <option value="none">None</option>
                         </select>
                         <br>
@@ -92,8 +92,8 @@
             <div class='profile profilepic-div'>
                 <img class='profile-profile-image' src='{{img}}' alt=''>
             </div>
-            <div class='profile post-amount'></div>
-            <div class='profile item-amount'></div>
+            <div class='profile post-amount'><p class='amount'>123</p><p class='posts'>posts</p></div>
+            <div class='profile item-amount'><p class='amount'>123</p><p class='posts'>items</p></div>
         </div>
         <p class='profile name'>{{name}}</p>
         <p class='profile username'>@{{userName}}</p>
@@ -105,7 +105,7 @@
         <div id="clothesList" class="row"></div>
     </div>
 
-    <div class="profile main-grid-item profile-part"></div>
+    <div class="profile main-grid-item profile-part rightright"></div>
 </div>
 
 
@@ -179,6 +179,7 @@ const clothesList = document.getElementById('clothesList');
 fetch('/dashboard/getClothes')
     .then(res => res.json())
     .then((item) => {
+        document.querySelector('.profile.item-amount p.amount').innerHTML = item.length;
         //clothesAmount.innerHTML = item.length
         //.map() is used to cycle through the array, and a template literal is used to return HTML for
         //each item in the array. We call these contact, and we can access items inside each contact, using contact.NAMEOFITEM. InnerHTML is then used to parse the returned HTML to the contactList object
@@ -234,6 +235,8 @@ const outfitList = document.getElementById('outfitList');
 fetch('/dashboard/getOutfits')
     .then(res => res.json())
     .then((outfits) => {
+        document.querySelector('.profile.post-amount p.amount').innerHTML = outfits.length;
+        console.log(outfits.length)
         var i = 0;
         clothesNum = outfits.length;
         var dataFeed;
