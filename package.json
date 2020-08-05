@@ -16,7 +16,7 @@
     "connect-flash": "^0.1.1",
     "croppie": "^2.6.4",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.7-alpha.3",
+    "express-fileupload": "^1.1.9",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.17.0",
     "fs": "0.0.1-security",
